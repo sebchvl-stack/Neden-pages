@@ -6,60 +6,107 @@
   <link rel="stylesheet" href="cv.css" />
 </head>
 <body>
+  <!--
+    Blocs data-block = cibles d'édition (Figma / NEDEN editor / IA)
+    Source de vérité : memory/* — ne pas inventer de faits
+  -->
   <article class="cv">
     <header class="cv-header">
       <div>
-        <h1>Sébastien Cheval</h1>
+        <h1 data-block="CV/Nom">Sébastien Cheval</h1>
         <p class="title" data-block="CV/Titre">Product Owner</p>
-        <p class="positioning">PRODUIT · AGILE SCRUM · BACKLOG · KANBAN</p>
+        <p class="positioning" data-block="CV/Keywords">PRODUIT · AGILE SCRUM · BACKLOG · KANBAN</p>
       </div>
-      <div class="contact">
+      <div class="contact" data-block="CV/Contact">
         <p>Nantes</p>
         <p>sebchvl@gmail.com</p>
         <p>06 12 36 07 50</p>
         <p>linkedin.com/in/sebastien-cheval-digital-explorateur</p>
       </div>
     </header>
-    <section class="kpis">
+
+    <section class="kpis" data-block="CV/KPI">
       <div><strong>10+</strong><span>ans d’expérience</span></div>
       <div><strong>50+</strong><span>clients</span></div>
       <div><strong>150+</strong><span>projets</span></div>
-      <div><strong>Bac+4</strong><span>Marketing & com</span></div>
+      <div><strong>Bac+4</strong><span>Marketing &amp; com</span></div>
     </section>
+
     <section>
       <h2>Profil</h2>
-      <p>Product Owner / directeur de projet, 10+ ans produits et projets digitaux. Interface métiers ↔ réalisation : vision, roadmap, backlog, ateliers, priorisation valeur/technique.</p>
+      <p data-block="CV/Profil">
+        Product Owner / directeur de projet, 10+ ans produits et projets digitaux.
+        Interface métiers ↔ réalisation : vision, roadmap, backlog, ateliers,
+        priorisation valeur / technique. Stratégie × création × relation humaine.
+      </p>
     </section>
-    <section>
+
+    <section data-block="CV/Experience">
       <h2>Expérience</h2>
+
       <div class="job">
-        <h3>Directeur de projet — produit & delivery Agile — associé</h3>
+        <h3>Directeur de projet — produit &amp; delivery Agile</h3>
         <p class="meta">Cyberscope · 2018 — aujourd’hui</p>
         <ul>
-          <li><strong>X</strong> Multi-clients · <strong>Y</strong> Pilotage Agile, backlog · <strong>Z</strong> 150+ projets</li>
-          <li><strong>X</strong> Alignement vision · <strong>Y</strong> Ateliers, Scrum/Kanban · <strong>Z</strong> Roadmaps tenues</li>
+          <li><strong>X</strong> Multi-clients digitaux · <strong>Y</strong> Pilotage produit &amp; delivery Agile, backlog, interface métiers/équipes · <strong>Z</strong> 150+ projets, continuité multi-comptes</li>
+          <li><strong>X</strong> Alignement vision/réalisation · <strong>Y</strong> Ateliers, priorisation valeur, Scrum/Kanban · <strong>Z</strong> Roadmaps tenues, qualité avec UX/dev</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <h3>Projets web &amp; contenus digitaux</h3>
+        <p class="meta">Animal &amp; Co · 2017 — 2018</p>
+        <ul>
+          <li><strong>X</strong> Visibilité marque en ligne · <strong>Y</strong> Projets web, réseaux sociaux, contenus · <strong>Z</strong> Présence digitale renforcée</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <h3>Supports &amp; outils digitaux marketing</h3>
+        <p class="meta">Alterburo · 2016 — 2017</p>
+        <ul>
+          <li><strong>X</strong> Outils digitaux marketing · <strong>Y</strong> Supports et outils · <strong>Z</strong> Soutien communication &amp; présence en ligne</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <h3>Supports &amp; projets web marque BtoC</h3>
+        <p class="meta">Ernest Soulard · 2014 — 2016</p>
+        <ul>
+          <li><strong>X</strong> Marque BtoC · <strong>Y</strong> Supports + projets web · <strong>Z</strong> Image de marque et engagement</li>
         </ul>
       </div>
     </section>
+
     <div class="two-col">
-      <section>
+      <section data-block="CV/Skills">
         <h2>Compétences</h2>
         <ul class="tags">
-          <li>Product Ownership</li><li>Scrum / Kanban</li><li>Backlog</li><li>Pilotage multi-projets</li>
-          <li>Communication digitale</li><li>CRM</li><li>Storytelling</li><li>Automation / IA</li>
+          <li>Product Ownership</li>
+          <li>Scrum / Kanban</li>
+          <li>Backlog &amp; roadmap</li>
+          <li>Pilotage multi-projets</li>
+          <li>Communication digitale</li>
+          <li>Storytelling</li>
+          <li>CRM</li>
+          <li>Automation / IA</li>
         </ul>
       </section>
-      <section>
+      <section data-block="CV/Tools">
         <h2>Outils</h2>
         <ul class="tags">
-          <li>Figma</li><li>Mobbin</li><li>Notion</li><li>Make</li><li>GitHub</li><li>Vercel</li>
-          <li>Cloudflare</li><li>Google AI Studio</li><li>Grok</li><li>Perplexity</li><li>HubSpot</li><li>Slack / Discord</li>
+          <li>Figma</li><li>Mobbin</li><li>Notion</li><li>Make</li>
+          <li>GitHub</li><li>Vercel</li><li>Cloudflare</li>
+          <li>Google AI Studio</li><li>Grok</li><li>Perplexity</li>
+          <li>HubSpot</li><li>Slack / Discord</li><li>Adobe</li>
         </ul>
       </section>
     </div>
-    <section>
+
+    <section data-block="CV/Formation">
       <h2>Formation</h2>
-      <p>Bac+4 Chef de projet marketing et communication — ISME Nantes</p>
+      <p>Bac+4 Chef de projet marketing et communication — ISME Nantes (2014—2016)</p>
+      <p>BTS Communication — Sup de Com Nantes (2012—2014)</p>
       <p>Parcours IA Google / Microsoft · HubSpot · Bases UX</p>
     </section>
   </article>
