@@ -1,0 +1,20 @@
+{
+  "name": "Sébastien Cheval",
+  "location": "Nantes",
+  "email": "sebchvl@gmail.com",
+  "phone": "06 12 36 07 50",
+  "linkedin": "linkedin.com/in/sebastien-cheval-digital-explorateur",
+  "kpis": {
+    "years": "10+",
+    "clients": "50+",
+    "projects": "150+",
+    "revenue_managed": "200K€+"
+  },
+  "default_title": "Product Owner",
+  "positioning": "PRODUIT · AGILE SCRUM · BACKLOG · KANBAN",
+  "tools_priority": [
+    "Figma", "Mobbin", "Notion", "Make", "GitHub", "Vercel", "Cloudflare",
+    "Google AI Studio", "Grok", "Perplexity", "HubSpot", "Slack", "Discord",
+    "Adobe Suite", "Google Workspace"
+  ]
+}
