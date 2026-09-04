@@ -1,0 +1,29 @@
+/**
+ * Tailwind entry — tokens.css must load first (imported in main.tsx).
+ * preflight disabled in tailwind.config.js to avoid clobbering global.css.
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .tw-btn-primary {
+    @apply inline-flex items-center rounded-full bg-neden-orange px-5 py-2.5 text-sm font-semibold text-neden-bg transition duration-neden-fast ease-neden hover:bg-neden-orange-hover hover:-translate-y-px hover:shadow-glow-orange;
+  }
+
+  .tw-btn-ghost {
+    @apply inline-flex items-center rounded-full border border-neden-border-strong px-5 py-2.5 text-sm font-medium text-neden-text transition duration-neden ease-neden hover:border-neden-orange hover:-translate-y-px;
+  }
+
+  .tw-card {
+    @apply rounded-neden-xl border border-neden-border bg-neden-surface p-6 transition duration-neden ease-neden hover:-translate-y-1 hover:border-neden-green-mid hover:shadow-glow-green;
+  }
+
+  .tw-chip {
+    @apply rounded-full border border-neden-border bg-neden-glass px-4 py-2 text-sm text-neden-text;
+  }
+
+  .tw-section-label {
+    @apply mb-3 text-xs font-medium uppercase tracking-[0.14em] text-neden-green-light;
+  }
+}
