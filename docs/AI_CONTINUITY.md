@@ -1,29 +1,51 @@
 # AI Continuity — NEDEN Pages + Profil + CV
 
-> **Dernière MAJ :** 2026-09-04
-> **Branches :** Neden-pages `design/site-foundation` · App `Neden-application` main
-> **Figma :** https://www.figma.com/design/NOLZUnUcR2iFPiu0bAzZjz (3 pages max · MCP rate-limited Starter)
+> **Dernière MAJ :** 2026-09-04 15:25 CEST  
+> **Branche active :** `002-design-system`  
+> **Master status :** `/STATUS.md`
 
-## Double identité
+## Double / triple identité
+
 | Couche | Rôle | Stack |
 |--------|------|-------|
-| NEDEN App | Cockpit candidatures / JARVIS | GAS + Notion + Make + Discord + PWA |
-| neden.fr | Site public OAuth + brand | React Vite RR · Cloudflare Pages |
+| NEDEN App | Cockpit candidatures / JARVIS | GAS + Notion + Index.html + PWA |
+| neden.fr | Site public OAuth + brand | React Vite Tailwind · Cloudflare |
 | NEDEN Studio | Photo · DA · design · GP | Au service du sens · Nantes |
 
-Slogan : **Au service du sens.** Nom turc « pourquoi », palindrome.
+Slogan studio : **Au service du sens.** · NEDEN = turc « pourquoi », palindrome.
+
+## Reprise en 60 secondes
+
+```bash
+git checkout 002-design-system && npm install && npm run dev
+```
+
+Lire : `STATUS.md` → `memory/AI_HANDOFF.md` → `prompts/NEXT_AI_DESIGN.md`
 
 ## Sources vérité profil
-memory/COMPETENCES, CHIFFRES_CLES, TITRES_POSTE, MOTS_CLES, MISSIONS_XYZ, OUTILS, CERTIFICATIONS, PROFILE.json, BRAND_NEDEN, POSITIONNEMENT
 
-## Constitution
-Respecter Neden-application/.specify/memory/constitution.md — Preserve before refactor · Spec before implementation · Human validation prod · No secrets · GAS unless AD
+`memory/COMPETENCES`, `CHIFFRES_CLES`, `TITRES_POSTE`, `MOTS_CLES`, `MISSIONS_XYZ`, `OUTILS`, `CERTIFICATIONS`, `PROFILE.json`, `BRAND_NEDEN`, `BRAND_STUDIO`, `POSITIONNEMENT`
 
-## Specs
-.specify/specs/001-cv-system.md · 002-site-content-blocks.md
+## Constitution (app + pages)
+
+`Neden-application/.specify/memory/constitution.md`  
+Preserve > Refactor · Spec before significant impl · Human GO prod · No secrets · Deterministic data · GAS reste backend app
+
+## Specs pages
+
+- `specs/002-design-system/*` (identité, site, logo, CV blocks)
+- `.specify/specs/001-cv-system.md`, `002-site-content-blocks.md` (legacy notes)
 
 ## Figma
-01 DS · 02 Components · 03 Hero — MCP limit: frames CV à compléter manuellement
+
+https://www.figma.com/design/NOLZUnUcR2iFPiu0bAzZjz — 3 pages max Starter · compléter via prompts si MCP limité
 
 ## Sans GO
-Deploy prod GAS / Cloudflare prod définitif
+
+- Deploy Cloudflare prod / merge main définitif
+- Deploy GAS production
+- Clasp push production
+
+## Changelog design (002)
+
+Voir section 7 de `STATUS.md` et `docs/DELIVERY_002.md`
