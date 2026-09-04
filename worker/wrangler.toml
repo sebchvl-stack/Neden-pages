@@ -1,0 +1,8 @@
+name = "neden-app-proxy"
+main = "app-proxy.js"
+compatibility_date = "2026-01-01"
+
+# APPS_SCRIPT_EXEC_URL est réglée via `wrangler secret put` ou le
+# dashboard Cloudflare (Settings > Variables) — pas ici en clair, même si
+# ce n'est pas un secret sensible (Principe VII : action compte
+# Cloudflare, hors périmètre agent).
