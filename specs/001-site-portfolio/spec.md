@@ -233,15 +233,36 @@ l'URL Apps Script), sans étape intermédiaire visible.
 
 ## Assumptions
 
-- Sébastien fournira, dans un message ultérieur, les fichiers source
-  couvrant : sa biographie/profil, ses compétences par domaine, ses
-  expériences professionnelles, ses formations/certifications (avec
-  logos), les logos des clients cités, le contenu des 6 pages
-  cyberscope.fr (inaccessibles depuis cet environnement de développement),
-  ses outils et passions, les chiffres clés de son bilan de compétences,
-  l'historique/pourquoi de NEDEN, et les URLs Discord/LinkedIn réels. Tant
-  que ces sources ne sont pas reçues, les sections correspondantes restent
-  en attente plutôt que publiées avec un contenu approximatif.
+- **Mise à jour 04/09/2026** : Sébastien a fourni 4 CV réels (versions Product
+  Manager/Extarnic, Product & Digital Leader/HelloWork, Directeur de Projet
+  Satisfaction Client/Callity, Directeur de Projet Outils Métier &
+  Infrastructure/Proxiad) + un export MesCompétences (docx). Profil,
+  Compétences par domaine, Expériences professionnelles, Formations &
+  certifications (texte — logos toujours en attente), Outils, Passions et
+  Chiffres clés sont maintenant publiés sur `Home.tsx`, synthétisés à partir
+  des éléments communs aux 4 CV (les 4 versions s'accordent sur les faits —
+  poste/dates chez Cyberscope, formation, ancienneté — et diffèrent
+  seulement par l'angle mis en avant selon l'offre visée). Un document
+  d'orientation professionnelle (bilan de compétences, tests de
+  personnalité type Big Five/RIASEC, éléments de vie privée) a été transmis
+  dans le même lot mais volontairement **pas utilisé** : hors périmètre
+  d'un portfolio public, à la différence des CV qui sont déjà conçus pour
+  être partagés à des tiers (constitution, Principe I/II).
+- **Mise à jour 04/09/2026** : Sébastien a fourni des captures cyberscope.fr
+  (cyberscope.fr reste inaccessible depuis cet environnement de
+  développement) couvrant 8 réalisations avec du contenu exploitable — KNAUF,
+  Le Huddl, AC Grains, Vivien Paillé, SPI Informatique, CFA 2S, LPO France,
+  Libellud — publiées sur `Home.tsx` (`REALISATIONS`, formule "X, Y, Z").
+  `gmp-lamotte`, prévu dans le brief d'origine, n'apparaît dans aucune
+  capture reçue — reste en attente plutôt que fabriqué. Images des
+  réalisations : toujours en attente.
+- Restent en attente : biographie/profil approfondi au-delà du CV (si
+  Sébastien veut aller plus loin), logos des formations/certifications,
+  logos des clients cités, images des réalisations, le contenu de
+  `gmp-lamotte` (cyberscope.fr), l'historique/pourquoi de NEDEN, et les URLs
+  Discord/LinkedIn réels. Tant que ces sources ne sont pas reçues, les
+  sections correspondantes restent en attente plutôt que publiées avec un
+  contenu approximatif.
 - Les chiffres clés cités dans la section NEDEN proviennent exclusivement
   de données déjà établies dans la documentation existante du projet
   NEDEN (docs/BILAN_2026-09-03.md, MEMORY.md du dépôt Neden-application) —
