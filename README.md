@@ -39,6 +39,13 @@ Voir `worker/` — un Cloudflare Worker qui relaie `app.neden.fr` vers l'URL
 domaine personnalisé directement). Déploiement détaillé en commentaire
 dans `worker/app-proxy.js`.
 
+Ce Worker sert aussi `/manifest.json` et `/sw.js` (PWA — NEDEN devient
+installable une fois accédé via `app.neden.fr` : "Ajouter à l'écran
+d'accueil" sur mobile, "Installer" sur desktop Chrome/Edge). Le service
+worker ne rend l'app installable et affiche un message hors-ligne clair —
+il ne tente jamais de faire fonctionner NEDEN sans connexion, l'app dépend
+de données live (`google.script.run`).
+
 ## État du contenu (2026-09-04)
 
 La majorité du contenu biographique/professionnel (profil, compétences,
