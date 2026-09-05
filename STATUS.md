@@ -1,39 +1,44 @@
 # STATUS NEDEN-PAGES — Point d’entrée reprise
 
-> **MAJ :** 2026-09-05 10:12 CEST  
+> **MAJ :** 2026-09-05 10:17 CEST  
 > **Branche :** `002-design-system`
 
-## État
+## Feux
 
-| Zone | Feu |
-|------|-----|
-| Source of Truth + foundations | 🟢 |
-| C01–C08 components contracts | 🟢 C06/C07 done |
-| N01 JARVIS · N02 AI Result | 🟢 |
-| App A01–A11 | 🟢 DESIGNED |
-| A12 ARWEN · A13 Video · A14 Brainstorm | 🟡 WIREFRAME isolés |
-| Site code / Tailwind / CV / brand SVG | 🟢 |
-| Merge/deploy prod | 🔴 GO |
+| Zone | État |
+|------|------|
+| Design contracts (F/C/N + screens) | 🟢 pack utilisable sans Figma |
+| Site IMPLEMENTED | 🟢 Home Privacy CGU Moodboard |
+| App contracts A01–A11 | 🟢 DESIGNED |
+| A12–A14 modules isolés | 🟡 WIREFRAME |
+| Code site Tailwind/micro/CV/brand | 🟢 |
+| Prod Cloudflare / merge main | 🔴 GO |
 | PNG favicon 120 | 🟡 |
 
-## Séparation modules
-**ARWEN** (A12) ≠ **VIDEO STUDIO** (A13) ≠ **BRAINSTORMING** (A14) ≠ **JARVIS** (A10)
+## Isolation
+ARWEN (A12) ≠ VIDEO (A13) ≠ BRAINSTORM (A14) ≠ JARVIS (A10)
 
-## Lecture
-STATUS → NEDEN_DESIGN_SOURCE_OF_TRUTH → design/README → design/screens/app/README → AI_HANDOFF
+## Lire dans l’ordre
+1. STATUS.md  
+2. NEDEN_DESIGN_SOURCE_OF_TRUTH.md  
+3. design/README.md  
+4. design/screens/app/README.md  
+5. design/content/CONTENT_MAP.md  
+6. memory/AI_HANDOFF.md
 
-## Backlog P0
-1. npm run dev validation  
-2. PNG favicon OAuth  
-3. GO merge Cloudflare  
+## Backlog
 
-## Backlog P1 restant
-- N06 roadmap DESIGNED  
-- Prototypes motion path Framer  
-- Logo tracks 2–5  
+**P0** npm dev · PNG favicon · GO deploy  
+**P1** Framer path scrub · logo tracks · A12–A14 → DESIGNED si besoin métier  
+**P2** Index.html pass (app) · 001-cv-generator pont  
 
 ## Journal
-| Date | Action |
-|------|--------|
-| 09-05 | Foundations + A01–A11 + C03/C04/N01 |
-| 09-05 | **C06 C07 N02 · A12–A14 stubs isolés** |
+| Quand | Quoi |
+|-------|------|
+| 09-04 | Site + SpecKit 002 + Tailwind |
+| 09-05 | design/ SoT · A01–A14 · C01–C08 · N01–N09 |
+| 09-05 | **N06 · site S0x · CONTENT_MAP** |
+
+```bash
+git checkout 002-design-system && npm i && npm run dev
+```

@@ -1,35 +1,30 @@
 # design/ — Registry Design System NEDEN
 
-Source of truth : `NEDEN_DESIGN_SOURCE_OF_TRUTH.md`
+**Truth :** `NEDEN_DESIGN_SOURCE_OF_TRUTH.md`
 
-## Foundations DS-F01–F06 — DESIGNED · mostly IMPLEMENTED
+## Foundations F01–F06 — DESIGNED · IMPLEMENTED (tokens.css)
 
-## Components DS-C
+## Components C01–C08 — all DESIGNED (site partial IMPLEMENTED)
 
-| ID | Status |
-|----|--------|
-| C01 Navigation | DESIGNED · IMPLEMENTED site |
-| C02 Buttons | DESIGNED · IMPLEMENTED |
-| C03 Forms | DESIGNED |
-| C04 Search / Filters | DESIGNED |
-| C05 Cards / KPI | DESIGNED · IMPLEMENTED site |
-| C06 Tables / Lists | **DESIGNED** |
-| C07 Tabs / Modal / Toast | **DESIGNED** |
-| C08 States | DESIGNED |
-
-## Modules DS-N
+## Modules N
 
 | ID | Status |
 |----|--------|
 | N01 JARVIS | DESIGNED |
-| N02 AI Result | **DESIGNED** |
-| N03 Path / Timeline | DESIGNED · IMPLEMENTED path site |
+| N02 AI Result | DESIGNED |
+| N03 Path | DESIGNED · IMPLEMENTED site |
 | N04 XYZ | DESIGNED · IMPLEMENTED site |
-| N05 CV Blocks | DESIGNED · IMPLEMENTED template |
-| N06 Roadmap | SPECIFIED |
-| N07 Brainstorm | **WIREFRAME** + A14 |
-| N08 Video Studio | **WIREFRAME** + A13 |
-| N09 ARWEN | **WIREFRAME** + A12 |
+| N05 CV | DESIGNED · IMPLEMENTED template |
+| N06 Roadmap/Activity | **DESIGNED** |
+| N07 Brainstorm | WIREFRAME + A14 |
+| N08 Video Studio | WIREFRAME + A13 |
+| N09 ARWEN | WIREFRAME + A12 |
 
 ## Screens
-`screens/app/` A01–A14 · `screens/site/` · `screens/cv/`
+- **App** A01–A14 · **Site** S01–S04 · **CV** N05
+
+## Content
+`content/CONTENT_MAP.md`
+
+## Motion
+`motion/patterns.md`

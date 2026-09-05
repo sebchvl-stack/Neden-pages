@@ -1,18 +1,16 @@
 # Changelog design — Neden-pages
 
-## 2026-09-05 (continue)
+## 2026-09-05 10:17
 
-### Added / Updated
-- C06 Tables/Lists DESIGNED
-- C07 Tabs/Modal/Toast DESIGNED
-- N02 AI Result DESIGNED
-- Screens A12 ARWEN · A13 Video Studio · A14 Brainstorm (WIREFRAME, isolés)
-- N07/N08/N09 aligned to A12–A14
+- N06 Roadmap/Activity DESIGNED
+- Site screen pack S01–S04 contracts
+- CONTENT_MAP memory → UI slots
+- Motion patterns table updated
 
-## 2026-09-05
+## 2026-09-05 earlier
 
-- Source of Truth · design/ F01–F06 · A01–A11 · C03/C04 · N01
+- SoT · F01–F06 · C01–C08 · N01–N09 · A01–A14
 
 ## 2026-09-04
 
-- SpecKit 002 · site code · Tailwind · memory content · brand SVG
+- SpecKit 002 · site implementation · brand SVG · handoff
