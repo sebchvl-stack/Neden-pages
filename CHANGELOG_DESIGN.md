@@ -1,16 +1,13 @@
-# Changelog design — Neden-pages
+# Changelog design
 
-## 2026-09-05 10:17
+## 2026-09-05 10:28
+- A12 ARWEN · A13 Video · A14 Brainstorm → DESIGNED
+- design/QA_CHECKLIST.md
+- Logo SVG track2 + track4
+- LOGO_TRACKS.md updated
 
-- N06 Roadmap/Activity DESIGNED
-- Site screen pack S01–S04 contracts
-- CONTENT_MAP memory → UI slots
-- Motion patterns table updated
-
-## 2026-09-05 earlier
-
-- SoT · F01–F06 · C01–C08 · N01–N09 · A01–A14
+## 2026-09-05
+- Full design/ registry F/C/N · A01–A11 · N06 · CONTENT_MAP · site S0x
 
 ## 2026-09-04
-
-- SpecKit 002 · site implementation · brand SVG · handoff
+- SpecKit 002 · site implementation

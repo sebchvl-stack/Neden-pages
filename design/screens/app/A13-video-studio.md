@@ -1,17 +1,25 @@
 # A13 — VIDEO STUDIO
 
-**Status :** WIREFRAME  
-**Module :** VIDEO STUDIO only — DS-N08  
-**Backend ref :** video flow / script modules in app
+**Status :** DESIGNED  
+**Module :** VIDEO STUDIO only · DS-N08
 
-## Entry
-Plus menu / nav **Video Studio** (exact label)
+## Purpose
+Scripts et flux vidéo — pipeline de production contenu vidéo.
 
-## Layout (draft)
-- List of scripts / projects vidéo
-- Status pipeline (draft → review → done) pills
-- Detail : script body + notes
-- No brainstorm idea-map UI here
+## Layout
+```
+[List scripts C06]     [Detail]
+ title · status pill    textarea script
+ date                   notes
+                        [Save]
+```
+
+## Status pills (example)
+Draft · Review · Ready · Published  
+Colors : muted · cyan · indigo · green-light
+
+## Mobile
+List first → push detail
 
 ## Isolation
-Separate routes and nav id from Brainstorm and ARWEN
+No idea-board · no PO columns · no JARVIS orb on this screen chrome

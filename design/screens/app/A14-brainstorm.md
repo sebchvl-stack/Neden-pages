@@ -1,17 +1,22 @@
 # A14 — BRAINSTORMING
 
-**Status :** WIREFRAME  
-**Module :** BRAINSTORMING only — DS-N07  
-**Backend ref :** `BrainstormingEngine.gs`
+**Status :** DESIGNED  
+**Module :** BRAINSTORMING only · DS-N07  
+**Backend :** BrainstormingEngine.gs
 
-## Entry
-Plus menu / nav **Brainstorm** (exact label)
+## Purpose
+Sessions d’idéation créative — capture et organisation d’idées.
 
-## Layout (draft)
-- Sessions list
-- Session detail : idea cards, tags, capture rapide
-- Export notes action
-- No video script pipeline UI here
+## Layout
+```
+Sessions list | Session board
+              | [Idea cards grid]
+              | Composer (C03)
+              | [Export]
+```
+
+## Idea card
+Title · body · tags chips · timestamp
 
 ## Isolation
-Keep creative ideation UX distinct from Video Studio and ARWEN
+No video pipeline · no ARWEN priority columns · JARVIS can *open* brainstorm via intent but UI stays A14
