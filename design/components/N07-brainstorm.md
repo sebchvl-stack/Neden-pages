@@ -1,9 +1,13 @@
 # DS-N07 — BRAINSTORMING module
 
-**Status :** SPECIFIED  
-**Isolation :** creative ideation only — **not** Video Studio, **not** ARWEN
+**Status :** WIREFRAME (screen A14)  
+**Isolation :** creative ideation only — **not** Video Studio, **not** ARWEN, **not** JARVIS persona
 
-## Scope UI
-- Session list, idea cards, tags
-- Actions : new session, export notes
-- Backend ref app : `BrainstormingEngine.gs` (do not merge UI chrome with video)
+## UI building blocks
+- Session list rows (C06)
+- Idea card : title + body + tags chips
+- Composer input (C03) for capture
+- Export control (C02 ghost)
+
+## Backend
+`BrainstormingEngine.gs` — UI must not call video endpoints

@@ -1,58 +1,39 @@
 # STATUS NEDEN-PAGES — Point d’entrée reprise
 
-> **MAJ :** 2026-09-05 10:05 CEST  
-> **Branche active :** `002-design-system`
+> **MAJ :** 2026-09-05 10:12 CEST  
+> **Branche :** `002-design-system`
 
-## 1. État global
+## État
 
-| Zone | État | Note |
-|------|------|------|
-| Design Source of Truth | 🟢 | root + `design/` |
-| Foundations F01–F06 | 🟢 | |
-| Components C01–C08 | 🟡 | C03/C04 DESIGNED ; C06/C07 encore SPECIFIED |
-| **App screen contracts A01–A11** | 🟢 | `design/screens/app/` |
-| JARVIS N01 states | 🟢 | DESIGNED |
-| Site Home / Tailwind / micro | 🟢 | |
-| Deploy merge main | 🔴 | GO |
-| PNG favicon OAuth | 🟡 | |
+| Zone | Feu |
+|------|-----|
+| Source of Truth + foundations | 🟢 |
+| C01–C08 components contracts | 🟢 C06/C07 done |
+| N01 JARVIS · N02 AI Result | 🟢 |
+| App A01–A11 | 🟢 DESIGNED |
+| A12 ARWEN · A13 Video · A14 Brainstorm | 🟡 WIREFRAME isolés |
+| Site code / Tailwind / CV / brand SVG | 🟢 |
+| Merge/deploy prod | 🔴 GO |
+| PNG favicon 120 | 🟡 |
 
-## 2. Modules isolés
-ARWEN ≠ VIDEO STUDIO ≠ BRAINSTORMING ≠ JARVIS
+## Séparation modules
+**ARWEN** (A12) ≠ **VIDEO STUDIO** (A13) ≠ **BRAINSTORMING** (A14) ≠ **JARVIS** (A10)
 
-## 3. Lecture IA
-1. STATUS.md  
-2. NEDEN_DESIGN_SOURCE_OF_TRUTH.md  
-3. design/README.md  
-4. design/screens/app/README.md  
-5. memory/AI_HANDOFF.md  
-6. prompts/NEXT_AI_DESIGN.md
+## Lecture
+STATUS → NEDEN_DESIGN_SOURCE_OF_TRUTH → design/README → design/screens/app/README → AI_HANDOFF
 
-## 4. Backlog
+## Backlog P0
+1. npm run dev validation  
+2. PNG favicon OAuth  
+3. GO merge Cloudflare  
 
-### P0
-1. `npm i && npm run dev`
-2. PNG 120 favicon
-3. GO merge + Cloudflare
+## Backlog P1 restant
+- N06 roadmap DESIGNED  
+- Prototypes motion path Framer  
+- Logo tracks 2–5  
 
-### P1 (suite)
-4. C06 lists + C07 modal/toast → DESIGNED
-5. N02 AI Result contract détaillé
-6. N07/N08/N09 screen stubs (module entries)
-7. Logo tracks exploration
-
-### P2
-8. Framer path scrub · CV generator pont · Index.html pass (app repo)
-
-## 5. Interdits
-GO prod · no invent data · no module mix · no Figma blocker · no React app rewrite sans AD
-
-## 6. Journal
+## Journal
 | Date | Action |
 |------|--------|
-| 09-04 | Site design system code + Tailwind + content |
-| 09-05 AM | design/ foundations + registry |
-| 09-05 AM+ | **A01–A11 contracts · C03/C04 · N01 JARVIS** |
-
-```bash
-git checkout 002-design-system && npm i && npm run dev
-```
+| 09-05 | Foundations + A01–A11 + C03/C04/N01 |
+| 09-05 | **C06 C07 N02 · A12–A14 stubs isolés** |

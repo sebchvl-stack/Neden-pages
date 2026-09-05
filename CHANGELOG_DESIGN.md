@@ -1,18 +1,18 @@
 # Changelog design — Neden-pages
 
-## 2026-09-05 (suite)
+## 2026-09-05 (continue)
 
-### Added
-- `design/screens/app/` — SHELL + A01–A11 design contracts
-- C03 forms + C04 search/filters → DESIGNED
-- N01 JARVIS state machine UI complète
+### Added / Updated
+- C06 Tables/Lists DESIGNED
+- C07 Tabs/Modal/Toast DESIGNED
+- N02 AI Result DESIGNED
+- Screens A12 ARWEN · A13 Video Studio · A14 Brainstorm (WIREFRAME, isolés)
+- N07/N08/N09 aligned to A12–A14
 
 ## 2026-09-05
 
-### Added
-- NEDEN_DESIGN_SOURCE_OF_TRUTH.md + design/ tree F01–F06, C/N registry, module isolation
+- Source of Truth · design/ F01–F06 · A01–A11 · C03/C04 · N01
 
 ## 2026-09-04
 
-### Added
-- SpecKit 002, tokens, Tailwind, Home, micro, moodboard, brand SVG, CV blocks, handoff docs
+- SpecKit 002 · site code · Tailwind · memory content · brand SVG

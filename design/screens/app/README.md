@@ -1,23 +1,21 @@
 # App screens — Design contracts
 
-**Surface :** theme-app · bg `#0B1120` · primary indigo · cyan data · green success only  
-**Impl code :** `Neden-application` `src/backend/Index.html` + modules — **Preserve > Refactor**  
-**Status global :** WIREFRAME → DESIGNED (contracts) · IMPLEMENTED = partiel dans app existante
+**Surface :** theme-app · `#0B1120` · indigo primary  
+**Code target :** `Neden-application` Index.html — Preserve > Refactor
+
+## Core (A01–A11)
 
 | ID | File | Status |
 |----|------|--------|
 | SHELL | _shell.md | DESIGNED |
-| A01 | A01-dashboard.md | DESIGNED |
-| A02 | A02-candidatures.md | DESIGNED |
-| A03 | A03-candidature-detail.md | DESIGNED |
-| A04 | A04-taches.md | DESIGNED |
-| A05 | A05-agenda.md | DESIGNED |
-| A06 | A06-documents.md | DESIGNED |
-| A07 | A07-business.md | DESIGNED |
-| A08 | A08-formations.md | DESIGNED |
-| A09 | A09-reglages.md | DESIGNED |
-| A10 | A10-jarvis.md | DESIGNED |
-| A11 | A11-cv-editor.md | DESIGNED |
+| A01–A11 | A0x-*.md | DESIGNED |
 
-Modules isolés (entrées Plus / deep links, pas tabs principales) :  
-**ARWEN** · **VIDEO STUDIO** · **BRAINSTORMING** — voir DS-N07/N08/N09.
+## Module surfaces (isolées)
+
+| ID | File | Module | Status |
+|----|------|--------|--------|
+| A12 | A12-arwen.md | **ARWEN** | WIREFRAME |
+| A13 | A13-video-studio.md | **VIDEO STUDIO** | WIREFRAME |
+| A14 | A14-brainstorm.md | **BRAINSTORMING** | WIREFRAME |
+
+Aucun mélange de chrome ou de copy entre A12 / A13 / A14 et A10 JARVIS.
