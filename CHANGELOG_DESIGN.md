@@ -1,24 +1,14 @@
 # Changelog design — Neden-pages
 
-## 2026-09-04 — branche `002-design-system`
+## 2026-09-05
 
 ### Added
-- SpecKit `specs/002-design-system/`
-- Tokens documentés + Tailwind 3 mapping
-- Home full content from memory
-- micro.css (12 micro-interactions)
-- Mobile nav burger
-- Moodboard route + docs
-- Logo/favicon SVG brand pack
-- CV template data-blocks + 4 jobs XYZ
-- APP_WIREFRAMES, LOGO_TRACKS, TOKENS, STATUS, AI_HANDOFF refresh
-- prompts/NEXT_AI_DESIGN.md, FIGMA_AND_AI_PROMPTS.md
+- `NEDEN_DESIGN_SOURCE_OF_TRUTH.md` — pipeline Spec→Contract→Code, statuts, isolation modules
+- `design/` tree : tokens F01–F06, components C01–C08, N01–N09 (ARWEN/VIDEO/BRAINSTORM/JARVIS séparés)
+- `design/motion/patterns.md`, screens site/app/cv stubs
+- STATUS mis à jour (entrée design registry)
 
-### Changed
-- Branche active design : `002-design-system` (vs design/site-foundation)
+## 2026-09-04 — `002-design-system`
 
-### Pending
-- PNG 120 favicon
-- Merge main + Cloudflare GO
-- Framer Motion scroll path
-- Logo tracks 2–5 exploration visuelle
+### Added
+- SpecKit 002, tokens, Tailwind, Home memory, micro.css, nav mobile, moodboard, brand SVG, CV data-blocks, docs handoff
