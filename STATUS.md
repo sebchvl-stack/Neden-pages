@@ -1,104 +1,58 @@
 # STATUS NEDEN-PAGES — Point d’entrée reprise
 
-> **MAJ :** 2026-09-05 09:15 CEST  
-> **Branche active :** `002-design-system`  
-> **Owner :** Sébastien Cheval · sebchvl@gmail.com · Nantes
-
----
+> **MAJ :** 2026-09-05 10:05 CEST  
+> **Branche active :** `002-design-system`
 
 ## 1. État global
 
 | Zone | État | Note |
 |------|------|------|
-| **Design Source of Truth** | 🟢 | `NEDEN_DESIGN_SOURCE_OF_TRUTH.md` + `design/` |
-| Foundations DS-F01–F06 | 🟢 | Contracts in `design/tokens/` |
-| Components DS-C01–C08 | 🟡 | C01/C02/C05/C08 designed+partial code ; rest specified |
-| Modules DS-N (séparés) | 🟢 | ARWEN ≠ VIDEO ≠ BRAINSTORM ≠ JARVIS documented |
-| Tokens + Tailwind | 🟢 | tokens.css · tailwind preflight off |
-| Site Home + micro + nav | 🟢 | |
-| Moodboard `/moodboard` | 🟢 | |
-| Logo SVG | 🟢 | PNG OAuth 🟡 |
-| CV template | 🟢 | |
-| Deploy / merge main | 🔴 | GO requis |
-| Figma GUI | 🟡 | Non bloquant (Git = vérité) |
+| Design Source of Truth | 🟢 | root + `design/` |
+| Foundations F01–F06 | 🟢 | |
+| Components C01–C08 | 🟡 | C03/C04 DESIGNED ; C06/C07 encore SPECIFIED |
+| **App screen contracts A01–A11** | 🟢 | `design/screens/app/` |
+| JARVIS N01 states | 🟢 | DESIGNED |
+| Site Home / Tailwind / micro | 🟢 | |
+| Deploy merge main | 🔴 | GO |
+| PNG favicon OAuth | 🟡 | |
 
----
+## 2. Modules isolés
+ARWEN ≠ VIDEO STUDIO ≠ BRAINSTORMING ≠ JARVIS
 
-## 2. Pipeline design (officiel)
+## 3. Lecture IA
+1. STATUS.md  
+2. NEDEN_DESIGN_SOURCE_OF_TRUTH.md  
+3. design/README.md  
+4. design/screens/app/README.md  
+5. memory/AI_HANDOFF.md  
+6. prompts/NEXT_AI_DESIGN.md
 
-```text
-Spec → Design Contract → Figma/Penpot (opt.) → Code → QA → DONE
-```
-
-Statuts : SPECIFIED → WIREFRAME → DESIGNED → PROTOTYPED → IMPLEMENTED → QA → DONE
-
----
-
-## 3. Séparation modules (stricte)
-
-| Nom | Rôle |
-|-----|------|
-| **ARWEN** | Product Owner surface |
-| **VIDEO STUDIO** | Module vidéo seul |
-| **BRAINSTORMING** | Module créatif seul |
-| **JARVIS** | Orchestrateur (délègue, ne remplace pas les 3) |
-
----
-
-## 4. Lecture IA (ordre)
-
-1. **STATUS.md** (ici)
-2. **NEDEN_DESIGN_SOURCE_OF_TRUTH.md**
-3. **design/README.md** (registry IDs)
-4. `memory/AI_HANDOFF.md`
-5. `docs/TOKENS.md` · `SITE_VS_APP.md`
-6. `prompts/NEXT_AI_DESIGN.md`
-7. App : `Neden-application/CLAUDE.md` + constitution
-
----
-
-## 5. Backlog
+## 4. Backlog
 
 ### P0
-1. Validation locale `npm i && npm run dev`
-2. PNG favicon 120 OAuth
-3. GO merge → main + Cloudflare
+1. `npm i && npm run dev`
+2. PNG 120 favicon
+3. GO merge + Cloudflare
 
-### P1 — Design system build
-4. Contrats écrans app A01–A11 détaillés sous `design/screens/app/`
-5. DS-C03 forms → DESIGNED + styles app/site
-6. DS-N01 JARVIS states UI contract complet
-7. Logo tracks 2–5 exploration
+### P1 (suite)
+4. C06 lists + C07 modal/toast → DESIGNED
+5. N02 AI Result contract détaillé
+6. N07/N08/N09 screen stubs (module entries)
+7. Logo tracks exploration
 
 ### P2
-8. Framer Motion path scrub
-9. 001-cv-generator pont template
-10. Pass UI Index.html (app repo, Preserve)
+8. Framer path scrub · CV generator pont · Index.html pass (app repo)
 
----
+## 5. Interdits
+GO prod · no invent data · no module mix · no Figma blocker · no React app rewrite sans AD
 
-## 6. Interdits
-
-- Deploy sans GO · inventer faits · vert dominant · secrets Git  
-- Mélanger ARWEN / VIDEO / BRAINSTORM / JARVIS  
-- Bloquer le build sur Figma Free  
-- Rewrite app React sans AD  
-- Tailwind preflight ON sans audit
-
----
-
-## 7. Journal
-
+## 6. Journal
 | Date | Action |
 |------|--------|
-| 2026-09-04 | SpecKit 002, Home, micro, Tailwind, moodboard, brand SVG |
-| 2026-09-05 | Source of Truth + `design/` F01–F06 + C/N registry + isolation modules |
-
----
-
-## 8. Commandes
+| 09-04 | Site design system code + Tailwind + content |
+| 09-05 AM | design/ foundations + registry |
+| 09-05 AM+ | **A01–A11 contracts · C03/C04 · N01 JARVIS** |
 
 ```bash
-git checkout 002-design-system
-npm install && npm run dev
+git checkout 002-design-system && npm i && npm run dev
 ```
