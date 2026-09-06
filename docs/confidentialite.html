@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NEDEN — Politique de confidentialité</title>
+<style>
+  :root{
+    --bg:#0B1120; --surface:#111827; --card:#1E293B; --border:rgba(255,255,255,.08);
+    --primary:#6366F1; --secondary:#22D3EE; --text:#F8FAFC; --text-dim:#94A3B8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.65}
+  .wrap{max-width:680px;margin:0 auto;padding:48px 24px 32px}
+  a{color:var(--secondary)}
+  h1{font-size:24px;font-weight:800;margin:0 0 6px;letter-spacing:-0.02em}
+  .updated{color:var(--text-dim);font-size:13px;margin-bottom:32px}
+  h2{font-size:16px;font-weight:700;margin:32px 0 10px;color:var(--secondary)}
+  p,li{color:var(--text-dim);font-size:14.5px}
+  ul{padding-left:20px}
+  li{margin-bottom:6px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 20px;margin:16px 0}
+  footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--border);font-size:13.5px}
+  footer a{text-decoration:none}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Politique de confidentialité — NEDEN</h1>
+    <div class="updated">Dernière mise à jour : 3 septembre 2026</div>
+
+    <p>
+      NEDEN est une application <strong>personnelle et à usage unique</strong>,
+      développée par Sébastien Cheval pour son propre usage. Elle n'est pas
+      distribuée ni proposée à d'autres utilisateurs. Cette page décrit,
+      honnêtement et sans détail superflu, quelles données NEDEN utilise et
+      pourquoi.
+    </p>
+
+    <h2>Qui utilise cette application</h2>
+    <p>
+      Une seule personne : Sébastien Cheval, à la fois développeur et unique
+      utilisateur. Aucun compte tiers n'y accède.
+    </p>
+
+    <h2>Données Google utilisées et pourquoi</h2>
+    <div class="card">
+      <ul>
+        <li><strong>Gmail (lecture et classement)</strong> — pour identifier automatiquement les emails liés à sa recherche d'emploi et à ses activités professionnelles, les classer par étiquettes, et générer un résumé quotidien.</li>
+        <li><strong>Google Calendar</strong> — pour créer et lire des événements (entretiens, formations, rappels) directement liés à son organisation personnelle.</li>
+        <li><strong>Google Drive</strong> — pour stocker et retrouver les documents générés par l'application (CV, comptes rendus) dans son propre Drive.</li>
+      </ul>
+    </div>
+
+    <h2>Ce que NEDEN ne fait jamais</h2>
+    <ul>
+      <li>Ne partage, ne vend, ni ne transmet aucune donnée à un tiers.</li>
+      <li>N'utilise les données Google qu'à l'intérieur de l'application, pour l'usage de son unique utilisateur.</li>
+      <li>N'affiche ni ne diffuse publiquement aucune donnée personnelle.</li>
+      <li>Ne conserve pas de copie des données Google en dehors de son propre compte Google et de son espace Notion personnel.</li>
+    </ul>
+
+    <h2>Autres services utilisés</h2>
+    <p>
+      NEDEN s'appuie aussi sur Notion (stockage structuré de ses candidatures,
+      tâches et projets) et, ponctuellement, sur des modèles d'IA (Google
+      Gemini et, en secours, d'autres fournisseurs) pour analyser du texte déjà
+      présent dans son propre espace de travail — jamais pour entraîner un
+      modèle tiers avec ses données.
+    </p>
+
+    <h2>Sécurité</h2>
+    <p>
+      L'application est hébergée sur Google Apps Script, protégée par une
+      authentification propre à son unique utilisateur. Les clés d'accès aux
+      services externes sont stockées de façon chiffrée côté Google
+      (Script Properties), jamais dans le code source.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Pour toute question sur cette politique : <a href="mailto:sebchvl@gmail.com">sebchvl@gmail.com</a>.
+    </p>
+
+    <footer><a href="index.html">← Retour à l'accueil</a></footer>
+  </div>
+</body>
+</html>
