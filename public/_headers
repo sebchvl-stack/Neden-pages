@@ -1,0 +1,44 @@
+# =============================================================================
+# neden.fr — en-têtes servis par Cloudflare Pages
+# -----------------------------------------------------------------------------
+# Pages lit ce fichier à la racine du dossier publié. C'est le seul endroit où
+# régler les en-têtes du site : le tableau de bord Cloudflare ne propose pas
+# ces réglages pour un projet Pages.
+#
+# Différence assumée avec app.neden.fr : ici, PAS de X-Robots-Tag. Le site
+# public DOIT être indexé — c'est son rôle, et une condition de la validation
+# OAuth Google. Le tableau de bord, lui, est en noindex par son Worker.
+# =============================================================================
+
+/*
+  # Deux ans, sous-domaines inclus. `preload` volontairement absent :
+  # l'inscription à la liste de préchargement des navigateurs est quasi
+  # irréversible, elle se demande en connaissance de cause.
+  Strict-Transport-Security: max-age=63072000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  # Un site vitrine n'a besoin d'aucune de ces API : les refuser toutes évite
+  # qu'un script tiers ajouté plus tard puisse les demander en silence.
+  Permissions-Policy: microphone=(), camera=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  # Le site ne doit jamais être encadré par un tiers.
+  X-Frame-Options: DENY
+  # CSP réelle et non permissive : le site est 100 % statique, on connaît
+  # exactement ce qu'il charge. 'unsafe-inline' sur style-src est nécessaire —
+  # React applique des styles en ligne — mais aucun 'unsafe-inline' sur
+  # script-src : tout le JavaScript vient de fichiers du même domaine.
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+
+# Les fichiers versionnés par Vite (hash dans le nom) ne changent jamais à
+# URL constante : un an de cache immuable, aucune revalidation.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# L'index, lui, doit être revalidé à chaque visite — sinon un déploiement
+# reste invisible pendant des heures pour qui a déjà chargé le site.
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+/robots.txt
+  Cache-Control: public, max-age=3600

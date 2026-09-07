@@ -1,8 +1,35 @@
-name = "neden-app-proxy"
-main = "app-proxy.js"
-compatibility_date = "2026-01-01"
+# =============================================================================
+# app.neden.fr — proxy inverse vers l'application Apps Script
+# -----------------------------------------------------------------------------
+# `name = "neden"` reprend le Worker DÉJÀ CRÉÉ sur le compte Cloudflare le
+# 06/09/2026, qui contenait encore le "Hello World!" par défaut (constaté le
+# 07/09/2026 via le connecteur). Le réutiliser évite de laisser un Worker
+# orphelin à côté d'un nouveau. Pour un Worker neuf, changer cette seule ligne.
+#
+# APPS_SCRIPT_EXEC_URL est une variable d'environnement Worker, réglée par
+# `wrangler secret put` ou dans le tableau de bord — jamais ici : elle change
+# à chaque nouveau déploiement Apps Script, et ce fichier est commité.
+#
+# Déploiement (depuis ce dossier) :
+#   npx wrangler secret put APPS_SCRIPT_EXEC_URL
+#   npx wrangler deploy
+# =============================================================================
 
-# APPS_SCRIPT_EXEC_URL est réglée via `wrangler secret put` ou le
-# dashboard Cloudflare (Settings > Variables) — pas ici en clair, même si
-# ce n'est pas un secret sensible (Principe VII : action compte
-# Cloudflare, hors périmètre agent).
+name = "neden"
+main = "app-proxy.js"
+compatibility_date = "2026-09-07"
+
+# La route ne s'active que si l'enregistrement DNS de app.neden.fr existe dans
+# la zone : un AAAA `app` vers 100:: avec le proxy activé (nuage orange).
+# 100:: est l'adresse de trou noir IPv6 — le trafic n'atteint jamais une vraie
+# machine, il est intercepté par le Worker. C'est le procédé recommandé par
+# Cloudflare pour un sous-domaine servi uniquement par un Worker.
+[[routes]]
+pattern = "app.neden.fr/*"
+zone_name = "neden.fr"
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+invocation_logs = true
+persist = true
