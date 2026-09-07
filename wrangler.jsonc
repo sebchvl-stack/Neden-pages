@@ -1,0 +1,22 @@
+{
+  // Site statique React/Vite (neden.fr) déployé via Workers Static Assets —
+  // le remplaçant moderne de "Cloudflare Pages" (Cloudflare a fusionné les
+  // deux produits). "neden-pages" reprend le nom du projet déjà créé dans le
+  // tableau de bord (Workers & Pages) le 07/09/2026 : ce fichier configure
+  // CE projet, il n'en crée pas un second.
+  //
+  // Pas de "main" : projet 100% assets statiques (build Vite), aucun code
+  // serveur à exécuter — voir Common Patterns > Assets-Only Projects,
+  // guide officiel Cloudflare de migration Pages → Workers.
+  "name": "neden-pages",
+  "compatibility_date": "2026-09-07",
+  "assets": {
+    "directory": "./dist",
+    // Remplace public/_redirects (ignoré par Workers Static Assets, qui
+    // n'est pas Cloudflare Pages malgré le nom du produit affiché dans le
+    // tableau de bord) — sans ça, un lien direct vers /confidentialite ou
+    // /cgu (React Router, rendu 100% client) renverrait un 404 au lieu de
+    // servir index.html.
+    "not_found_handling": "single-page-application"
+  }
+}
