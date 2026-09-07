@@ -84,31 +84,78 @@ self.addEventListener('fetch', (event) => {
 });
 `;
 
+// Domaines vers lesquels une redirection Apps Script est légitime.
+const HOTES_AUTORISES = ['script.google.com', 'script.googleusercontent.com'];
+
+/**
+ * En-têtes de sécurité posés sur CHAQUE réponse — c'est le principal intérêt
+ * de passer par notre propre domaine : l'hébergement Apps Script ne permet pas
+ * de les régler.
+ *
+ * Choisis un par un pour ne rien casser. Volontairement PAS de
+ * Content-Security-Policy stricte : l'app repose sur du script inline et un
+ * iframe cross-origin, une CSP écrite à l'aveugle la casserait entièrement
+ * pour un gain théorique.
+ */
+function entetesSecurite(headers) {
+  const h = new Headers(headers);
+  // Deux ans, sous-domaines inclus. `preload` volontairement ABSENT :
+  // l'inscription à la liste de préchargement des navigateurs est quasi
+  // irréversible, elle se demande en connaissance de cause.
+  h.set('Strict-Transport-Security', 'max-age=63072000; includeSubDomains');
+  h.set('X-Content-Type-Options', 'nosniff');
+  // same-origin-allow-popups et non same-origin : l'authentification Google
+  // ouvre des popups, que same-origin casserait.
+  h.set('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+  h.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  // Micro et caméra délégués à l'iframe Google — voir le pari décrit plus bas.
+  h.set('Permissions-Policy',
+    'microphone=(self "https://script.googleusercontent.com"), ' +
+    'camera=(self "https://script.googleusercontent.com"), ' +
+    'geolocation=(), payment=(), usb=()');
+  // SAMEORIGIN et non DENY : l'app s'encadre elle-même.
+  h.set('X-Frame-Options', 'SAMEORIGIN');
+  h.set('X-Robots-Tag', 'noindex, nofollow');
+  return h;
+}
+
 export default {
   async fetch(request, env) {
     const incoming = new URL(request.url);
 
     if (request.method === 'GET' && incoming.pathname === '/manifest.json') {
       return new Response(MANIFEST_JSON, {
-        headers: {
+        headers: entetesSecurite({
           'Content-Type': 'application/manifest+json; charset=utf-8',
           'Cache-Control': 'public, max-age=3600'
-        }
+        })
       });
     }
     if (request.method === 'GET' && incoming.pathname === '/sw.js') {
       return new Response(SW_JS, {
-        headers: {
+        headers: entetesSecurite({
           'Content-Type': 'application/javascript; charset=utf-8',
           'Service-Worker-Allowed': '/',
           'Cache-Control': 'public, max-age=3600'
-        }
+        })
+      });
+    }
+
+    // robots.txt servi ici : sans lui, la page d'app renvoyée par Apps Script
+    // passerait pour un robots.txt vide, donc permissif. Le tableau de bord
+    // n'a rien à faire dans un index de moteur de recherche — contrairement à
+    // neden.fr, qui doit lui être indexé.
+    if (request.method === 'GET' && incoming.pathname === '/robots.txt') {
+      return new Response('User-agent: *\nDisallow: /\n', {
+        headers: entetesSecurite({ 'Content-Type': 'text/plain; charset=utf-8' })
       });
     }
 
     const execUrl = env.APPS_SCRIPT_EXEC_URL;
     if (!execUrl) {
-      return new Response('APPS_SCRIPT_EXEC_URL non configurée sur ce Worker.', { status: 500 });
+      return new Response('APPS_SCRIPT_EXEC_URL non configurée sur ce Worker.', {
+        status: 503, headers: entetesSecurite({ 'Content-Type': 'text/plain; charset=utf-8' })
+      });
     }
 
     const target = new URL(execUrl);
@@ -124,10 +171,49 @@ export default {
       redirect: 'follow'
     });
 
-    const response = await fetch(proxied);
-    // GAS redirige souvent en interne vers googleusercontent.com pour
-    // servir le HTML réel — `redirect: 'follow'` ci-dessus le gère déjà
-    // côté Worker, donc la réponse renvoyée ici est déjà le contenu final.
-    return new Response(response.body, response);
+    let response;
+    try {
+      response = await fetch(proxied);
+    } catch (err) {
+      return new Response('Application injoignable : ' + err.message, {
+        status: 502, headers: entetesSecurite({ 'Content-Type': 'text/plain; charset=utf-8' })
+      });
+    }
+
+    // GAS redirige souvent en interne vers googleusercontent.com pour servir
+    // le HTML réel — `redirect: 'follow'` ci-dessus le gère déjà. Garde-fou :
+    // si la redirection sort des domaines Google, on ne relaie pas. Sans ce
+    // contrôle, app.neden.fr serait un proxy ouvert servant n'importe quel
+    // site sous le domaine de Sébastien.
+    const hoteFinal = new URL(response.url || target.toString()).hostname;
+    const autorise = HOTES_AUTORISES.some(function (h) {
+      return hoteFinal === h || hoteFinal.endsWith('.' + h);
+    });
+    if (!autorise) {
+      return new Response('Redirection inattendue vers ' + hoteFinal + ' — requête refusée.', {
+        status: 502, headers: entetesSecurite({ 'Content-Type': 'text/plain; charset=utf-8' })
+      });
+    }
+
+    const sortie = new Response(response.body, {
+      status: response.status,
+      headers: entetesSecurite(response.headers)
+    });
+
+    // Le pari micro (voir l'en-tête de fichier) : ajouter allow="microphone"
+    // sur l'iframe d'Apps Script. À vérifier en conditions réelles — si
+    // Google construit cet iframe en JavaScript après chargement,
+    // HTMLRewriter ne le voit pas et rien ne change.
+    if ((response.headers.get('content-type') || '').indexOf('text/html') !== -1) {
+      return new HTMLRewriter().on('iframe', {
+        element(el) {
+          const deja = el.getAttribute('allow') || '';
+          if (deja.indexOf('microphone') === -1) {
+            el.setAttribute('allow', (deja ? deja + '; ' : '') + 'microphone; camera');
+          }
+        }
+      }).transform(sortie);
+    }
+    return sortie;
   }
 };

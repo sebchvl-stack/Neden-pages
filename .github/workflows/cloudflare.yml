@@ -1,0 +1,80 @@
+# =============================================================================
+# Cloudflare — configuration de zone + déploiement du Worker app.neden.fr
+# -----------------------------------------------------------------------------
+# Deux tâches indépendantes : si le déploiement du Worker échoue, les réglages
+# de zone restent appliqués, et inversement. Les enchaîner ferait perdre les
+# deux pour un seul problème.
+#
+# UN SEUL SECRET À CRÉER : CLOUDFLARE_API_TOKEN, dans
+# Settings → Secrets and variables → Actions du dépôt.
+# Portées du jeton (Cloudflare → My Profile → API Tokens → Create Token) :
+#   Zone   · Zone            · Read    (retrouver l'identifiant de la zone)
+#   Zone   · Zone Settings   · Edit    (SSL, HSTS, sécurité)
+#   Zone   · DNS             · Edit    (créer app.neden.fr)
+#   Account· Workers Scripts · Edit    (déployer le Worker)
+# Limiter la ressource à la zone neden.fr : un jeton restreint qui fuite fait
+# moins de dégâts qu'un jeton global.
+# =============================================================================
+
+name: Cloudflare — zone et Worker
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'worker/**'
+      - 'scripts/cloudflare-setup.mjs'
+      - '.github/workflows/cloudflare.yml'
+  # Permet de relancer à la demande depuis l'onglet Actions, sans commit —
+  # utile après un changement fait à la main au tableau de bord.
+  workflow_dispatch:
+    inputs:
+      simulation:
+        description: "Simulation (n'écrit rien, affiche ce qui changerait)"
+        type: boolean
+        default: false
+
+jobs:
+  zone:
+    name: Réglages de zone
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Appliquer la configuration
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_NAME: neden.fr
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::error::CLOUDFLARE_API_TOKEN absent des secrets du dépôt."
+            echo "À créer dans Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+          node scripts/cloudflare-setup.mjs ${{ inputs.simulation && '--dry-run' || '' }}
+
+  worker:
+    name: Worker app.neden.fr
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Déployer
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        working-directory: worker
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::error::CLOUDFLARE_API_TOKEN absent des secrets du dépôt."
+            exit 1
+          fi
+          npx --yes wrangler@3 deploy
+      - name: Rappel sur l'URL Apps Script
+        run: |
+          echo "::notice::APPS_SCRIPT_EXEC_URL est une variable du Worker, pas un secret GitHub."
+          echo "::notice::Elle change à chaque nouveau déploiement Apps Script : si app.neden.fr renvoie une erreur 503, c'est presque toujours ça."
+          echo "::notice::La régler avec : npx wrangler secret put APPS_SCRIPT_EXEC_URL (depuis worker/)"
