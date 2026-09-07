@@ -1,10 +1,16 @@
 import { Link } from 'react-router-dom';
+import useDocumentMeta from '../hooks/useDocumentMeta';
 
 // Contenu repris tel quel (fond) du texte déjà rédigé et approuvé par
 // Sébastien dans Neden-application/docs/GUIDE_PAGES_OAUTH_PUBLIQUES.md —
 // seule la forme (mise en page React/Tailwind) change ici. Ne pas
 // contredire ces faits (constitution, Principe V).
 export default function Confidentialite() {
+  useDocumentMeta(
+    'Politique de confidentialité — NEDEN',
+    "Ce que NEDEN fait des données Google auxquelles l'application accède, et ce qu'elle n'en fait pas.",
+    '/confidentialite'
+  );
   return (
     <div className="max-w-3xl mx-auto px-6 py-16">
       <h1 className="text-2xl font-extrabold tracking-tight mb-1">

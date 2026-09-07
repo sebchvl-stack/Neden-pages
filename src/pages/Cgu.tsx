@@ -1,8 +1,14 @@
 import { Link } from 'react-router-dom';
+import useDocumentMeta from '../hooks/useDocumentMeta';
 
 // Contenu repris tel quel du texte déjà approuvé (voir Confidentialite.tsx
 // pour la source exacte).
 export default function Cgu() {
+  useDocumentMeta(
+    "Conditions d'utilisation — NEDEN",
+    "Conditions d'utilisation de NEDEN, l'orchestrateur personnel de Sébastien Cheval.",
+    '/cgu'
+  );
   return (
     <div className="max-w-3xl mx-auto px-6 py-16">
       <h1 className="text-2xl font-extrabold tracking-tight mb-1">

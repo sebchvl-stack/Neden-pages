@@ -1,4 +1,5 @@
 import Footer from '../components/Footer';
+import useDocumentMeta from '../hooks/useDocumentMeta';
 
 // Clients réellement cités par Sébastien (noms confirmés) — logos en
 // attente (constitution, Principe II : nom réel affichable, logo jamais
@@ -193,6 +194,11 @@ const CHIFFRES_CLES = [
 ];
 
 export default function Home() {
+  useDocumentMeta(
+    'NEDEN — Sébastien Cheval',
+    "Profil hybride technique, produit et design. Compétences, expériences, réalisations, et NEDEN — l'orchestrateur personnel construit au quotidien.",
+    '/'
+  );
   return (
     <div>
       {/* ---------- Hero ---------- */}

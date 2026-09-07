@@ -5,6 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>NEDEN — Sébastien Cheval</title>
     <meta name="description" content="NEDEN — orchestrateur personnel de Sébastien Cheval. Profil, compétences, expériences, réalisations, et le projet NEDEN." />
+
+    <!-- Canonique : sans elle, neden.fr et www.neden.fr sont deux pages
+         distinctes aux yeux de Google et se font concurrence dans l'index. -->
+    <link rel="canonical" href="https://neden.fr/" />
+    <meta name="theme-color" content="#12151E" />
+    <meta name="author" content="Sébastien Cheval" />
+    <!-- Explicite plutôt que par défaut : la validation OAuth Google vérifie
+         que la page d'accueil est publique et indexable. -->
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph : ce qui s'affiche quand le lien est partagé sur LinkedIn,
+         le canal principal pour un site de profil professionnel. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="NEDEN" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:url" content="https://neden.fr/" />
+    <meta property="og:title" content="NEDEN — Sébastien Cheval" />
+    <meta property="og:description" content="Profil hybride technique, produit et design. Compétences, expériences, réalisations, et NEDEN — l'orchestrateur personnel construit au quotidien." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="NEDEN — Sébastien Cheval" />
+    <meta name="twitter:description" content="Profil hybride technique, produit et design. Compétences, expériences, réalisations, et NEDEN." />
+
+    <!-- Données structurées : le format que Google attend pour un site de
+         profil. Volontairement limité aux faits déjà publiés sur la page —
+         aucun champ rempli au jugé. og:image et sameAs sont absents tant que
+         l'image de partage et les URL LinkedIn/Discord réelles ne sont pas
+         fournies : une balise qui pointe dans le vide dégrade le partage au
+         lieu de l'améliorer. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Sébastien Cheval",
+        "url": "https://neden.fr/",
+        "jobTitle": "Chef de projet digital / Product Owner",
+        "address": { "@type": "PostalAddress", "addressLocality": "Nantes", "addressCountry": "FR" }
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

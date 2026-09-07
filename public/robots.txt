@@ -1,0 +1,10 @@
+# neden.fr — site public. Tout est indexable : c'est son rôle, et c'est aussi
+# une condition de la validation OAuth Google (la page d'accueil doit être
+# atteignable sans authentification).
+# app.neden.fr (le tableau de bord) est exclu de l'indexation par son propre
+# en-tête X-Robots-Tag, posé par le Worker — pas ici : ce fichier ne vaut que
+# pour ce domaine.
+User-agent: *
+Allow: /
+
+Sitemap: https://neden.fr/sitemap.xml
