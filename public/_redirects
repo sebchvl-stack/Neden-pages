@@ -1,1 +1,4 @@
-/*    /index.html   200
+# Ce fichier est obsolète pour Workers Static Assets.
+# La config SPA est gérée par wrangler.jsonc : "not_found_handling": "single-page-application"
+# Cloudflare détectait une boucle infinie dans la règle `/* /index.html 200`.
+# Garder ce fichier vide (ou supprimer) — Vite le copiera dans dist/ mais Workers l'ignorera.
