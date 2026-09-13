@@ -78,6 +78,16 @@ peut couper un service dont on ignore l'existence.
 - **Google Search Console** — vérification par TXT et soumission du sitemap.
   Tant que ce n'est pas fait, Google ne sait pas que le site existe, et aucun
   réglage Cloudflare n'y changera rien.
+- **Custom Domain du site lui-même (neden.fr → projet `neden-pages`)** — le
+  script ne gère QUE le DNS de `app.` (le Worker proxy). Rattacher le
+  domaine principal au projet `neden-pages` (Workers & Pages → `neden-pages`
+  → Settings → Domains & Routes → Add) reste un clic manuel, une fois.
+  Piège vécu le 13/09/2026 : lors de la migration Pages → Workers Static
+  Assets, `site.neden.fr` avait été rattaché au nouveau projet mais pas
+  l'apex `neden.fr` — resté orphelin, d'où une erreur "SSL handshake
+  failed" (Cloudflare 525) alors que Google Cloud Console listait bien
+  `neden.fr` comme domaine autorisé. Voir
+  `docs/GUIDE_FINALISATION_DOMAINE_OAUTH.md` pour la procédure complète.
 
 ## Un piège qui coûte cher
 
