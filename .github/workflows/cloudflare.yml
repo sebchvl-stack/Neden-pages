@@ -72,7 +72,11 @@ jobs:
             echo "::error::CLOUDFLARE_API_TOKEN absent des secrets du dépôt."
             exit 1
           fi
-          npx --yes wrangler@3 deploy
+          # --config explicite : sans lui, wrangler lisait le wrangler.jsonc
+          # du site à la racine du dépôt (qui attend un dossier dist/) au
+          # lieu de ce worker/wrangler.toml — trouvé le 13/09/2026 dans les
+          # logs ("assets.directory ... does not exist: .../Neden-pages/dist").
+          npx --yes wrangler@3 deploy --config wrangler.toml
       - name: Rappel sur l'URL Apps Script
         run: |
           echo "::notice::APPS_SCRIPT_EXEC_URL est une variable du Worker, pas un secret GitHub."
