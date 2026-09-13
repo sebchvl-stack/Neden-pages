@@ -270,6 +270,37 @@ export default function Confidentialite() {
               .
             </p>
           </SectionCard>
+
+          <SectionCard numero={8} titre="Conservation des données et conformité Google API Services">
+            <p>
+              <strong className="text-ink">Durée de conservation</strong> — NEDEN ne conserve aucune copie
+              séparée des données Google au-delà de leur usage direct : les emails restent dans la boîte
+              Gmail de l'utilisateur (l'application y applique des étiquettes, elle ne les copie pas
+              ailleurs), les événements sont créés directement dans son propre Google Calendar, et les
+              documents restent dans son propre Google Drive. Les seules données dérivées conservées (par
+              exemple un résumé ou une étiquette de suivi) le sont dans l'espace Notion personnel de
+              l'utilisateur, aussi longtemps que son compte reste actif.
+            </p>
+            <p className="pt-2 border-t border-edge">
+              <strong className="text-ink">Conformité Google API Services User Data Policy</strong> —
+              L'utilisation et le transfert, par NEDEN, d'informations reçues des API Google vers toute
+              autre application respectent la{' '}
+              <a
+                href="https://developers.google.com/terms/api-services-user-data-policy"
+                target="_blank"
+                rel="noreferrer"
+                className="text-secondary hover:underline"
+              >
+                Google API Services User Data Policy
+              </a>
+              , y compris les exigences de{' '}
+              <em>Limited Use</em>.
+            </p>
+            <p className="text-xs text-dim/80 italic">
+              NEDEN's use and transfer to any other app of information received from Google APIs will
+              adhere to the Google API Services User Data Policy, including the Limited Use requirements.
+            </p>
+          </SectionCard>
         </div>
 
         <div className="mt-12 pt-6 border-t border-edge text-sm">

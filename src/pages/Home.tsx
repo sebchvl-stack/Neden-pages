@@ -431,11 +431,17 @@ export default function Home() {
       {/* ---------- NEDEN ---------- */}
       <section className="max-w-5xl mx-auto px-6 py-16">
         <div className="bg-card border border-edge rounded-2xl p-6 sm:p-8 shadow-[inset_0_1px_0_rgba(255,255,255,.04)]">
-          <h2 className="text-2xl font-bold mb-2">NEDEN — mon orchestrateur personnel</h2>
-          <p className="text-dim text-sm mb-6">
-            Pas un concept théorique : une infrastructure privée que j&rsquo;utilise et fais évoluer
-            au quotidien. Histoire et raison d&rsquo;être complètes : en attente des fichiers
-            annoncés par Sébastien.
+          <div className="inline-flex items-center gap-2 bg-cardAlt px-3 py-1 rounded-full mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
+            <span className="text-secondary text-xs font-semibold tracking-wide">Objectif de l'application</span>
+          </div>
+          <h2 className="text-2xl font-bold mb-3">NEDEN — orchestrateur personnel de recherche d'emploi</h2>
+          <p className="text-ink text-sm leading-relaxed mb-6">
+            <strong>NEDEN est une application privée à usage strictement personnel</strong>, conçue,
+            administrée et utilisée par un seul et unique utilisateur, Sébastien Cheval, pour centraliser
+            sa recherche d'emploi et son organisation professionnelle : candidatures, tâches, formations
+            et emails liés à l'emploi regroupés dans un tableau de bord unique. Une infrastructure réelle,
+            utilisée et fait évoluer au quotidien — pas un concept théorique.
           </p>
 
           <div className="grid sm:grid-cols-2 gap-3 mb-6">
@@ -449,22 +455,19 @@ export default function Home() {
 
           <div className="bg-surface border border-edge rounded-xl p-4 text-dim text-sm">
             L&rsquo;accès aux données Google (Gmail, Calendar, Drive) sert uniquement à faire
-            fonctionner ces automatisations pour son unique utilisateur — voir la{' '}
+            fonctionner ces automatisations pour son unique utilisateur, qui reste seul propriétaire de
+            ses données — voir la{' '}
             <a href="/confidentialite" className="text-secondary hover:underline">
               politique de confidentialité
             </a>{' '}
-            pour le détail exact.
+            pour le détail exact scope par scope.
           </div>
 
-          <p className="text-dim text-sm mt-6">
-            Chiffres clés et technologies détaillées : en attente (constitution, Principe I —
-            seules des données déjà vérifiées dans la documentation du projet seront publiées ici).
+          <p className="text-dim text-xs mt-6 italic">
+            Histoire complète, chiffres clés et liens Discord/LinkedIn : en attente des sources que
+            Sébastien doit encore fournir (constitution, Principe I — seules des données déjà vérifiées
+            sont publiées ici).
           </p>
-
-          <div className="flex gap-4 mt-6 text-sm">
-            <span className="text-dim italic">Lien Discord — en attente</span>
-            <span className="text-dim italic">Lien LinkedIn — en attente</span>
-          </div>
         </div>
       </section>
 
