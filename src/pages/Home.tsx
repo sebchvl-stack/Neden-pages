@@ -27,6 +27,13 @@ const CLIENTS = [
 // faisant Z), un projet par capture reçue avec du contenu exploitable.
 // gmp-lamotte (prévu à l'origine) n'apparaît dans aucune capture reçue —
 // reste en attente plutôt que fabriqué.
+//
+// 13/09/2026 — comparé au maquettage Figma "11- Site internet (temporaire)"
+// (node 535:744) : une 9e carte "Cyberscope Digital Suite" y apparaît, avec
+// un chiffre "+45% de fidélisation" dans la section chronologie. Ni l'un ni
+// l'autre ne provient d'une capture cyberscope.fr reçue ni d'un document
+// déjà vérifié — délibérément PAS repris ici (Principe VI). Le design de la
+// section (cartes, mise en page) est, lui, repris.
 const REALISATIONS = [
   {
     client: 'KNAUF',
@@ -93,27 +100,41 @@ const REALISATIONS = [
 // psychométriques, éléments de vie privée) hors du périmètre d'un
 // portfolio public (constitution, Principe I/II — on publie ce qui est
 // pertinent professionnellement, jamais par défaut tout ce qui est fourni).
-
+//
+// Regroupées en "piliers" (mise en page reprise du maquettage Figma) — les
+// 4 premiers domaines correspondent terme à terme aux 4 piliers du design ;
+// "Création & Design" reste un 5e domaine réel, sans équivalent Figma, donc
+// ajouté en 5e carte plutôt qu'écarté.
 const COMPETENCE_DOMAINES = [
   {
     domaine: 'Stratégie & Produit',
+    resume:
+      "Feuilles de route produit, cadrage d'opportunité, formalisation des modèles économiques digitaux et pilotage par les OKR.",
     items: ['Product strategy', 'Roadmap & priorisation', 'Discovery', 'KPI & analytics', 'Stratégie marketing/communication', 'Développement commercial']
   },
   {
     domaine: 'Direction & Management',
+    resume:
+      "Gouvernance opérationnelle d'agence, pilotage de comités de suivi, gestion budgétaire et accompagnement à la transformation digitale.",
     items: ["Leadership d'équipe pluridisciplinaire", 'Gestion de projet', 'Gestion budgétaire', 'Relation client', 'Pilotage de la performance']
   },
   {
-    domaine: 'Tech & Data',
+    domaine: 'Tech & Data Architecture',
+    resume:
+      "Coordination technique sur des infrastructures web, architecture & sécurité, delivery et suivi des indicateurs de conversion.",
     items: ['Coordination technique', 'Architecture & infrastructure', 'Sécurité IT', 'Delivery', 'Tracking, conversion & reporting']
   },
   {
-    domaine: 'Création & Design',
-    items: ['Direction artistique', 'Suite Adobe (Photoshop, Illustrator, InDesign, Première Pro)', 'Figma', 'Identité de marque', 'Photographie']
+    domaine: 'IA & Systèmes Autonomes',
+    resume:
+      "Conception d'automatisations et d'agents IA appliqués à des besoins réels (voir NEDEN, plus bas sur cette page).",
+    items: ['IA générative', 'Automatisation', 'Prototypage', 'Veille technologique']
   },
   {
-    domaine: 'IA & Innovation',
-    items: ['IA générative', 'Automatisation', 'Prototypage', 'Veille technologique']
+    domaine: 'Création & Design',
+    resume:
+      "Direction artistique et identité de marque, de la conception graphique à la production photo.",
+    items: ['Direction artistique', 'Suite Adobe (Photoshop, Illustrator, InDesign, Première Pro)', 'Figma', 'Identité de marque', 'Photographie']
   }
 ];
 
@@ -187,10 +208,26 @@ const PASSIONS = [
 ];
 
 const CHIFFRES_CLES = [
-  { valeur: '10+', label: "ans d'expérience en pilotage de projets digitaux" },
-  { valeur: '50+', label: 'clients actifs accompagnés' },
-  { valeur: '200K€+', label: 'de CA annuel piloté' },
-  { valeur: '20+', label: 'lancements e-commerce & marketplace' }
+  { valeur: '10+', label: "Années d'expérience", detail: "Direction de projets, stratégie d'agence et conseil exécutif continu." },
+  { valeur: '50+', label: 'Clients & grands comptes', detail: "PME d'envergure, ETI industrielles et institutions publiques accompagnées." },
+  { valeur: '200K€+', label: 'Budget / CA piloté', detail: "Gestion budgétaire récurrente et enveloppes d'investissements logiciels." },
+  { valeur: '20+', label: 'Lancements réussis', detail: 'E-commerce, marketplace et applications métier mis en production.' }
+];
+
+// Ce que NEDEN fait réellement aujourd'hui — inchangé dans le fond, restylé
+// en cartes courtes pour le nouvel habillage. Volontairement PAS de nombre
+// d'agents affiché : le maquettage Figma annonçait "7 agents synchronisés"
+// avec des noms (dont "NEO & NOTION") qui ne correspondent à aucun agent du
+// vrai registre NEDEN (AGENTS_PERSONAS, dépôt Neden-application) — ni
+// l'ancien ni l'actuel. Un chiffre inventé sur une page qui sert aussi à la
+// vérification OAuth de l'app NEDEN serait exactement la donnée fabriquée
+// que le Principe VI de la constitution interdit.
+const NEDEN_CAPACITES = [
+  { titre: 'Organisation', texte: "Candidatures, tâches, formations et projets centralisés dans Notion." },
+  { titre: 'Emails', texte: "Lecture et classement automatique des emails liés à la recherche d'emploi (Gmail)." },
+  { titre: 'Agenda & documents', texte: 'Planification des événements (Google Calendar) et gestion des documents (Google Drive).' },
+  { titre: 'Assistant JARVIS', texte: 'Réponses en langage naturel, avec une équipe de plusieurs agents spécialisés selon la tâche.' },
+  { titre: 'Veille & réunions', texte: 'Veille automatique et transcription de réunions (visio ou en présentiel).' }
 ];
 
 export default function Home() {
@@ -202,15 +239,19 @@ export default function Home() {
   return (
     <div>
       {/* ---------- Hero ---------- */}
-      <header className="max-w-5xl mx-auto px-6 pt-24 pb-16">
+      <header className="max-w-5xl mx-auto px-6 pt-24 pb-20">
+        <div className="inline-flex items-center gap-2 text-xs uppercase tracking-wide text-secondary bg-card border border-edge rounded-full px-3 py-1 mb-6">
+          Direction de projets digitaux · Stratégie, produit & IA
+        </div>
         <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-extrabold text-xl mb-6">
           N
         </div>
-        <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-3">
-          Sébastien Cheval
+        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight mb-5 max-w-3xl">
+          Pilote d&rsquo;impact entre stratégie d&rsquo;affaires, ingénierie agile et IA
         </h1>
-        <p className="text-secondary font-semibold">
-          Direction de projets digitaux · Stratégie, produit &amp; création — et NEDEN
+        <p className="text-dim leading-relaxed max-w-2xl text-lg">
+          Sébastien Cheval — direction de comptes d&rsquo;envergure, co-gouvernance d&rsquo;agence
+          digitale, et NEDEN, l&rsquo;orchestrateur personnel construit et opéré au quotidien.
         </p>
       </header>
 
@@ -235,13 +276,15 @@ export default function Home() {
         </p>
       </section>
 
-      {/* ---------- Compétences par domaine ---------- */}
+      {/* ---------- Quatre piliers (+ Création & Design) ---------- */}
       <section className="max-w-5xl mx-auto px-6 py-16">
-        <h2 className="text-2xl font-bold mb-6">Compétences par domaine</h2>
+        <h2 className="text-2xl font-bold mb-2">Quatre piliers au service de l&rsquo;excellence digitale</h2>
+        <p className="text-dim text-sm mb-6">Compétences par domaine.</p>
         <div className="grid sm:grid-cols-2 gap-4">
           {COMPETENCE_DOMAINES.map((d) => (
-            <div key={d.domaine} className="bg-card border border-edge rounded-2xl p-5">
-              <h3 className="font-bold mb-3">{d.domaine}</h3>
+            <div key={d.domaine} className="bg-card border border-edge rounded-2xl p-6">
+              <h3 className="font-bold mb-2">{d.domaine}</h3>
+              <p className="text-dim text-sm mb-4">{d.resume}</p>
               <div className="flex flex-wrap gap-2">
                 {d.items.map((item) => (
                   <span
@@ -257,12 +300,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- Expériences professionnelles ---------- */}
+      {/* ---------- Chronologie (expériences) ---------- */}
       <section className="max-w-5xl mx-auto px-6 py-16">
-        <h2 className="text-2xl font-bold mb-6">Expériences professionnelles</h2>
+        <h2 className="text-2xl font-bold mb-6">Chronologie d&rsquo;un leadership forgé sur le terrain</h2>
         <div className="space-y-6">
           {EXPERIENCES.map((e) => (
-            <div key={e.periode + e.poste} className="border-l-2 border-edge pl-5">
+            <div key={e.periode + e.poste} className="bg-card border border-edge rounded-2xl border-l-4 border-l-secondary pl-5 pr-5 py-5">
               <div className="text-xs uppercase tracking-wide text-secondary mb-1">{e.periode}</div>
               <div className="font-bold">{e.poste}</div>
               <div className="text-dim text-sm">{e.structure}</div>
@@ -313,16 +356,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- Réalisations ---------- */}
+      {/* ---------- Réalisations emblématiques ---------- */}
       <section className="max-w-5xl mx-auto px-6 py-16">
-        <h2 className="text-2xl font-bold mb-2">Exemples de réalisations</h2>
+        <h2 className="text-2xl font-bold mb-2">Réalisations emblématiques &amp; plateformes déployées</h2>
         <p className="text-dim text-sm mb-6">
           Synthétisées à partir de captures cyberscope.fr fournies par Sébastien (cyberscope.fr
           reste inaccessible depuis cet environnement de développement). Images à venir.
         </p>
         <div className="grid sm:grid-cols-2 gap-4">
           {REALISATIONS.map((r) => (
-            <div key={r.client} className="bg-card border border-edge rounded-2xl p-5">
+            <div key={r.client} className="bg-card border border-edge rounded-2xl p-6">
               <div className="text-xs uppercase tracking-wide text-secondary mb-1">{r.client}</div>
               <h3 className="font-bold mb-2">{r.titre}</h3>
               <p className="text-dim text-sm">{r.texte}</p>
@@ -376,7 +419,8 @@ export default function Home() {
           {CHIFFRES_CLES.map((c) => (
             <div key={c.label} className="bg-card border border-edge rounded-2xl p-5 text-center">
               <div className="text-3xl font-extrabold text-secondary mb-1">{c.valeur}</div>
-              <div className="text-dim text-xs">{c.label}</div>
+              <div className="text-ink text-xs font-semibold mb-1">{c.label}</div>
+              <div className="text-dim text-xs">{c.detail}</div>
             </div>
           ))}
         </div>
@@ -384,38 +428,41 @@ export default function Home() {
 
       {/* ---------- NEDEN ---------- */}
       <section className="max-w-5xl mx-auto px-6 py-16">
-        <h2 className="text-2xl font-bold mb-2">NEDEN</h2>
-        <p className="text-dim text-sm mb-6">
-          Histoire et raison d'être : en attente des fichiers annoncés par Sébastien.
-        </p>
+        <div className="bg-card border border-edge rounded-2xl p-6 sm:p-8 shadow-[inset_0_1px_0_rgba(255,255,255,.04)]">
+          <h2 className="text-2xl font-bold mb-2">NEDEN — mon orchestrateur personnel</h2>
+          <p className="text-dim text-sm mb-6">
+            Pas un concept théorique : une infrastructure privée que j&rsquo;utilise et fais évoluer
+            au quotidien. Histoire et raison d&rsquo;être complètes : en attente des fichiers
+            annoncés par Sébastien.
+          </p>
 
-        <div className="bg-card border border-edge rounded-2xl p-6">
-          <h3 className="text-xs uppercase tracking-wide text-dim mb-3">Ce que fait NEDEN</h3>
-          <ul className="list-disc pl-5 text-dim text-sm space-y-2">
-            <li>Organise candidatures, tâches, formations et projets dans Notion.</li>
-            <li>Lit et classe automatiquement les emails liés à la recherche d'emploi (Gmail).</li>
-            <li>Planifie des événements (Google Calendar) et gère des documents (Google Drive).</li>
-            <li>Répond en langage naturel via un assistant intégré (JARVIS), avec une équipe de plusieurs agents spécialisés.</li>
-            <li>Effectue une veille automatique et transcrit des réunions (visio ou en présentiel).</li>
-          </ul>
-          <p className="text-dim text-sm mt-4">
-            L'accès aux données Google (Gmail, Calendar, Drive) sert uniquement à faire
+          <div className="grid sm:grid-cols-2 gap-3 mb-6">
+            {NEDEN_CAPACITES.map((n) => (
+              <div key={n.titre} className="bg-surface border border-edge rounded-xl p-4">
+                <div className="font-semibold text-sm mb-1">{n.titre}</div>
+                <div className="text-dim text-xs">{n.texte}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="bg-surface border border-edge rounded-xl p-4 text-dim text-sm">
+            L&rsquo;accès aux données Google (Gmail, Calendar, Drive) sert uniquement à faire
             fonctionner ces automatisations pour son unique utilisateur — voir la{' '}
             <a href="/confidentialite" className="text-secondary hover:underline">
               politique de confidentialité
             </a>{' '}
             pour le détail exact.
+          </div>
+
+          <p className="text-dim text-sm mt-6">
+            Chiffres clés et technologies détaillées : en attente (constitution, Principe I —
+            seules des données déjà vérifiées dans la documentation du projet seront publiées ici).
           </p>
-        </div>
 
-        <p className="text-dim text-sm mt-6">
-          Chiffres clés et technologies détaillées : en attente (constitution, Principe I —
-          seules des données déjà vérifiées dans la documentation du projet seront publiées ici).
-        </p>
-
-        <div className="flex gap-4 mt-6 text-sm">
-          <span className="text-dim italic">Lien Discord — en attente</span>
-          <span className="text-dim italic">Lien LinkedIn — en attente</span>
+          <div className="flex gap-4 mt-6 text-sm">
+            <span className="text-dim italic">Lien Discord — en attente</span>
+            <span className="text-dim italic">Lien LinkedIn — en attente</span>
+          </div>
         </div>
       </section>
 
