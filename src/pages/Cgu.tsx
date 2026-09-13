@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
+import Header from '../components/Header';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 
-// Structure (numérotation d'articles, sommaire) reprise du maquettage Figma
+// Structure (numérotation d'articles, cartes) reprise du maquettage Figma
 // NOLZUnUcR2iFPiu0bAzZjz, page "11- Site internet (temporaire)", frame
 // 535:12 — demandé par Sébastien le 13/09/2026. Le FOND reste celui déjà
 // approuvé (Neden-application/docs/GUIDE_PAGES_OAUTH_PUBLIQUES.md) : aucun
@@ -9,6 +10,10 @@ import useDocumentMeta from '../hooks/useDocumentMeta';
 // formel du maquette (mentions de poursuites en cas d'intrusion, etc.) est
 // repris tel quel — c'est un registre juridique standard de CGU, pas une
 // donnée factuelle vérifiable au sens du Principe VI.
+//
+// Non repris du maquette : un badge de version logicielle ("R&D v3.4.1")
+// qui ne correspond à aucun numéro de version réellement suivi pour ce
+// site — un chiffre inventé n'a pas sa place sur un document contractuel.
 const ARTICLES = [
   {
     numero: 1,
@@ -20,7 +25,7 @@ const ARTICLES = [
   },
   {
     numero: 2,
-    titre: 'Accès et restriction d’usage',
+    titre: "Accès et restriction d'usage",
     paragraphes: [
       "L'application app.neden.fr constitue un espace strictement privé, exclusivement réservé à son concepteur et unique utilisateur, Sébastien Cheval.",
       "Aucun mécanisme d'inscription publique, de souscription commerciale ou d'ouverture d'espace utilisateur pour des personnes tierces n'est proposé.",
@@ -52,9 +57,9 @@ const ARTICLES = [
   },
   {
     numero: 6,
-    titre: 'Contact & assistance',
+    titre: 'Contact et assistance',
     paragraphes: [
-      'Pour toute question relative aux présentes conditions ou à l’application :'
+      'Pour toute question relative aux présentes conditions ou à l\'application, vous pouvez vous adresser directement au concepteur :'
     ]
   }
 ];
@@ -66,51 +71,87 @@ export default function Cgu() {
     '/cgu'
   );
   return (
-    <div className="max-w-3xl mx-auto px-6 py-16">
-      <h1 className="text-2xl font-extrabold tracking-tight mb-1">
-        Conditions d'utilisation — NEDEN
-      </h1>
-      <div className="text-dim text-xs mb-8">Dernière mise à jour : 13 septembre 2026</div>
+    <>
+      <Header />
+      <div className="max-w-3xl mx-auto px-6 py-16">
+        <div className="inline-flex items-center gap-2 bg-cardAlt px-3 py-1 rounded-full mb-4">
+          <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
+          <span className="text-secondary text-xs font-semibold tracking-wide">
+            Documentation légale & cadre opérationnel
+          </span>
+        </div>
+        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1 text-ink">
+          Conditions d'utilisation — NEDEN
+        </h1>
+        <div className="text-dim text-xs mb-8">Dernière mise à jour : 13 septembre 2026</div>
 
-      <p className="text-dim text-sm leading-relaxed mb-8">
-        NEDEN est un outil personnel développé et utilisé par une seule personne, Sébastien
-        Cheval, pour organiser sa propre recherche d'emploi et son activité professionnelle. Il
-        n'est ni distribué, ni vendu, ni proposé à d'autres utilisateurs.
-      </p>
+        <div className="bg-cardAlt border border-edge rounded-xl p-6 mb-8">
+          <div className="text-secondary text-sm font-semibold mb-2">Avertissement essentiel</div>
+          <p className="text-dim text-sm leading-relaxed">
+            L'environnement applicatif <strong className="text-ink">NEDEN</strong> constitue une
+            plateforme personnelle développée et administrée à titre privé par{' '}
+            <strong className="text-ink">Sébastien Cheval</strong>. Aucun service grand public ou
+            adhésion commerciale tierce n'est proposé.
+          </p>
+          <div className="flex flex-wrap gap-2 mt-4">
+            <div className="bg-bg/40 border border-edge rounded-lg px-3 py-2 flex items-center gap-2 text-xs">
+              <span className="text-dim">Ouverture aux tiers</span>
+              <span className="text-danger font-semibold">Aucune</span>
+            </div>
+            <div className="bg-bg/40 border border-edge rounded-lg px-3 py-2 flex items-center gap-2 text-xs">
+              <span className="text-dim">Nature de l'usage</span>
+              <span className="text-secondary font-semibold">Restreint & personnel</span>
+            </div>
+          </div>
+        </div>
 
-      <div className="bg-card border border-edge rounded-2xl p-5 mb-10">
-        <div className="text-xs uppercase tracking-wide text-secondary mb-3">Index des articles</div>
-        <ol className="text-dim text-sm space-y-1 list-decimal pl-5">
+        <div className="bg-cardAlt border border-edge rounded-xl p-5 mb-10">
+          <div className="text-xs uppercase tracking-wide text-secondary mb-3">Index des articles</div>
+          <ol className="text-dim text-sm space-y-1 list-decimal pl-5">
+            {ARTICLES.map((a) => (
+              <li key={a.numero}>{a.titre}</li>
+            ))}
+          </ol>
+        </div>
+
+        <div className="space-y-4">
           {ARTICLES.map((a) => (
-            <li key={a.numero}>{a.titre}</li>
-          ))}
-        </ol>
-      </div>
-
-      {ARTICLES.map((a) => (
-        <div key={a.numero} className="mb-8">
-          <h2 className="text-secondary font-bold mb-2">
-            {a.numero}. {a.titre}
-          </h2>
-          {a.paragraphes.map((p, i) => (
-            <p key={i} className="text-dim text-sm leading-relaxed mt-2">
-              {p}
-            </p>
+            <div key={a.numero} className="bg-card border border-edge rounded-xl p-6 sm:p-8">
+              <div className="flex items-center gap-3 mb-3">
+                <span className="text-secondary font-mono text-xs bg-cardAlt border border-edge rounded-full w-6 h-6 flex items-center justify-center shrink-0">
+                  {a.numero}
+                </span>
+                <h2 className="text-ink font-semibold text-lg">{a.titre}</h2>
+              </div>
+              <div className="text-dim text-sm leading-relaxed space-y-3">
+                {a.paragraphes.map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
+                {a.numero === 6 && (
+                  <a href="mailto:sebchvl@gmail.com" className="text-secondary hover:underline">
+                    sebchvl@gmail.com
+                  </a>
+                )}
+              </div>
+            </div>
           ))}
         </div>
-      ))}
 
-      <p className="text-dim text-sm leading-relaxed">
-        <a href="mailto:sebchvl@gmail.com" className="text-secondary hover:underline">
-          sebchvl@gmail.com
-        </a>
-      </p>
-
-      <div className="mt-12 pt-6 border-t border-edge text-sm">
-        <Link to="/" className="text-secondary hover:underline">
-          ← Retour à l'accueil
-        </Link>
+        <div className="bg-cardAlt border border-edge rounded-xl p-6 sm:p-8 mt-6 flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <div className="text-ink font-semibold">Fin du document contractuel</div>
+            <div className="text-dim text-sm mt-1">
+              Vous pouvez retourner à l'accueil du portfolio.
+            </div>
+          </div>
+          <Link
+            to="/"
+            className="bg-edge hover:bg-edgeLight transition-colors text-ink text-sm font-medium px-5 py-2.5 rounded-lg"
+          >
+            ← Retour à l'accueil
+          </Link>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

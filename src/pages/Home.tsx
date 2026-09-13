@@ -1,4 +1,5 @@
 import Footer from '../components/Footer';
+import Header from '../components/Header';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 
 // Clients réellement cités par Sébastien (noms confirmés) — logos en
@@ -238,6 +239,7 @@ export default function Home() {
   );
   return (
     <div>
+      <Header />
       {/* ---------- Hero ---------- */}
       <header className="max-w-5xl mx-auto px-6 pt-24 pb-20">
         <div className="inline-flex items-center gap-2 text-xs uppercase tracking-wide text-secondary bg-card border border-edge rounded-full px-3 py-1 mb-6">
