@@ -1,32 +1,27 @@
 # =============================================================================
-# Cloudflare — configuration de zone + déploiement du Worker app.neden.fr
+# Cloudflare — configuration de zone neden.fr (site public uniquement)
 # -----------------------------------------------------------------------------
-# Deux tâches indépendantes : si le déploiement du Worker échoue, les réglages
-# de zone restent appliqués, et inversement. Les enchaîner ferait perdre les
-# deux pour un seul problème.
+# Ce workflow ne déploie PLUS le Worker app.neden.fr.
+# Source de vérité app.neden.fr : Neden-application/workers/app-proxy/
+# (décision produit 15/09/2026 — option a : retirer le Worker de Neden-pages).
 #
 # UN SEUL SECRET À CRÉER : CLOUDFLARE_API_TOKEN, dans
 # Settings → Secrets and variables → Actions du dépôt.
 # Portées du jeton (Cloudflare → My Profile → API Tokens → Create Token) :
-#   Zone   · Zone            · Read    (retrouver l'identifiant de la zone)
-#   Zone   · Zone Settings   · Edit    (SSL, HSTS, sécurité)
-#   Zone   · DNS             · Edit    (créer app.neden.fr)
-#   Account· Workers Scripts · Edit    (déployer le Worker)
-# Limiter la ressource à la zone neden.fr : un jeton restreint qui fuite fait
-# moins de dégâts qu'un jeton global.
+#   Zone   · Zone            · Read
+#   Zone   · Zone Settings   · Edit
+#   Zone   · DNS             · Edit
+# Limiter la ressource à la zone neden.fr.
 # =============================================================================
 
-name: Cloudflare — zone et Worker
+name: Cloudflare — zone neden.fr
 
 on:
   push:
     branches: [main]
     paths:
-      - 'worker/**'
       - 'scripts/cloudflare-setup.mjs'
       - '.github/workflows/cloudflare.yml'
-  # Permet de relancer à la demande depuis l'onglet Actions, sans commit —
-  # utile après un changement fait à la main au tableau de bord.
   workflow_dispatch:
     inputs:
       simulation:
@@ -54,31 +49,3 @@ jobs:
             exit 1
           fi
           node scripts/cloudflare-setup.mjs ${{ inputs.simulation && '--dry-run' || '' }}
-
-  worker:
-    name: Worker app.neden.fr
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - name: Déployer
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        working-directory: worker
-        run: |
-          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
-            echo "::error::CLOUDFLARE_API_TOKEN absent des secrets du dépôt."
-            exit 1
-          fi
-          # --config explicite : sans lui, wrangler lisait le wrangler.jsonc
-          # du site à la racine du dépôt (qui attend un dossier dist/) au
-          # lieu de ce worker/wrangler.toml — trouvé le 13/09/2026 dans les
-          # logs ("assets.directory ... does not exist: .../Neden-pages/dist").
-          npx --yes wrangler@3 deploy --config wrangler.toml
-      - name: Rappel sur l'URL Apps Script
-        run: |
-          echo "::notice::APPS_SCRIPT_EXEC_URL est une variable du Worker, pas un secret GitHub."
-          echo "::notice::Elle change à chaque nouveau déploiement Apps Script : si app.neden.fr renvoie une erreur 503, c'est presque toujours ça."
-          echo "::notice::La régler avec : npx wrangler secret put APPS_SCRIPT_EXEC_URL (depuis worker/)"
