@@ -1,9 +1,17 @@
 # =============================================================================
-# Cloudflare — configuration de zone + déploiement du Worker app.neden.fr
+# Cloudflare — configuration de zone (DNS/SSL) pour neden.fr
 # -----------------------------------------------------------------------------
-# Deux tâches indépendantes : si le déploiement du Worker échoue, les réglages
-# de zone restent appliqués, et inversement. Les enchaîner ferait perdre les
-# deux pour un seul problème.
+# Le déploiement du Worker app.neden.fr (shell COMMAND OS + proxy API) vit
+# désormais uniquement dans Neden-application/workers/app-proxy — décision
+# du 16/09/2026 (audit du 15/09) : ce dépôt avait son propre worker/, une
+# copie obsolète (headers navigateur bruts relayés → 502) qui déployait sur
+# le MÊME Worker Cloudflare que Neden-application (même `name = "neden"`,
+# même route `app.neden.fr/*`), avec un vrai risque d'écrasement silencieux
+# de la prod à chaque push. Supprimé plutôt que synchronisé : entretenir
+# deux pipelines de déploiement pour un seul Worker n'apporte rien, et le
+# dernier arrivé écrase toujours l'autre. La fonctionnalité PWA (manifest/
+# service worker) que ce Worker portait a été reprise dans
+# Neden-application/workers/app-proxy/app-proxy.js avant cette suppression.
 #
 # UN SEUL SECRET À CRÉER : CLOUDFLARE_API_TOKEN, dans
 # Settings → Secrets and variables → Actions du dépôt.
@@ -11,18 +19,16 @@
 #   Zone   · Zone            · Read    (retrouver l'identifiant de la zone)
 #   Zone   · Zone Settings   · Edit    (SSL, HSTS, sécurité)
 #   Zone   · DNS             · Edit    (créer app.neden.fr)
-#   Account· Workers Scripts · Edit    (déployer le Worker)
 # Limiter la ressource à la zone neden.fr : un jeton restreint qui fuite fait
 # moins de dégâts qu'un jeton global.
 # =============================================================================
 
-name: Cloudflare — zone et Worker
+name: Cloudflare — zone
 
 on:
   push:
     branches: [main]
     paths:
-      - 'worker/**'
       - 'scripts/cloudflare-setup.mjs'
       - '.github/workflows/cloudflare.yml'
   # Permet de relancer à la demande depuis l'onglet Actions, sans commit —
@@ -54,19 +60,3 @@ jobs:
             exit 1
           fi
           node scripts/cloudflare-setup.mjs ${{ inputs.simulation && '--dry-run' || '' }}
-
-  # -------------------------------------------------------------------------
-  # Worker app.neden.fr — DÉSACTIVÉ (audit 15/09/2026)
-  # La prod COMMAND OS est déployée depuis Neden-application/workers/app-proxy.
-  # Ce job écraserait ce Worker avec worker/app-proxy.js (headers bruts → 502).
-  # Réactiver seulement après décision Sébastien (retirer worker/ OU sync).
-  # -------------------------------------------------------------------------
-  # worker:
-  #   name: Worker app.neden.fr
-  #   if: false
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: Déployer (désactivé)
-  #       working-directory: worker
-  #       run: npx --yes wrangler@3 deploy --config wrangler.toml

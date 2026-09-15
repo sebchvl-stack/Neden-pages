@@ -2,12 +2,16 @@
 
 ## Ce qui tourne tout seul
 
-`.github/workflows/cloudflare.yml` fait deux choses, à chaque push sur `main`
-touchant `worker/` ou le script, et à la demande depuis l'onglet Actions :
+`.github/workflows/cloudflare.yml` **applique les réglages de zone**
+(`scripts/cloudflare-setup.mjs`) — SSL, HSTS, TLS, sécurité, compression, et
+l'enregistrement DNS de `app.neden.fr` — à chaque push sur `main` touchant
+ce script, et à la demande depuis l'onglet Actions.
 
-1. **Applique les réglages de zone** (`scripts/cloudflare-setup.mjs`) — SSL,
-   HSTS, TLS, sécurité, compression, et l'enregistrement DNS de app.neden.fr.
-2. **Déploie le Worker** app.neden.fr.
+Le déploiement du **Worker** `app.neden.fr` lui-même (shell COMMAND OS +
+proxy API + PWA) ne vit plus ici depuis le 16/09/2026 (audit du 15/09) —
+voir `Neden-application/workers/app-proxy/`. Ce dépôt avait son propre
+`worker/`, qui ciblait le même Worker Cloudflare et relayait encore les
+en-têtes navigateur bruts (502) : supprimé plutôt que synchronisé.
 
 Le script est **idempotent** : il lit chaque réglage avant de l'écrire, ne
 touche que ce qui diffère, et son journal ne liste que de vrais changements.
@@ -28,7 +32,6 @@ Cloudflare → **My Profile** → **API Tokens** → **Create Token** →
 | Zone · Zone | Read |
 | Zone · Zone Settings | Edit |
 | Zone · DNS | Edit |
-| Account · Workers Scripts | Edit |
 
 **Zone Resources** : limiter à `neden.fr`. Un jeton restreint qui fuite fait
 beaucoup moins de dégâts qu'un jeton global.
@@ -40,7 +43,7 @@ Dépôt `neden-pages` → **Settings** → **Secrets and variables** → **Actio
 
 ### 3. Lancer
 
-Onglet **Actions** → *Cloudflare — zone et Worker* → **Run workflow**.
+Onglet **Actions** → *Cloudflare — zone* → **Run workflow**.
 Cocher **Simulation** au premier essai : le script affiche ce qu'il changerait
 sans rien écrire. Relancer sans la case pour appliquer.
 
@@ -71,10 +74,10 @@ peut couper un service dont on ignore l'existence.
   et une règle mal posée bloque du trafic légitime. Un clic au tableau de bord
   est ici plus sûr qu'un script.
 - **La redirection www → apex** — Redirect Rules, à créer une fois.
-- **`APPS_SCRIPT_EXEC_URL`** — variable du Worker, pas un secret GitHub. Elle
-  change à chaque nouveau déploiement Apps Script. Une erreur 503 sur
-  app.neden.fr vient presque toujours de là :
-  `cd worker && npx wrangler secret put APPS_SCRIPT_EXEC_URL`
+- **`APPS_SCRIPT_EXEC_URL`** — variable du Worker `app.neden.fr`, gérée
+  depuis `Neden-application/workers/app-proxy/` (plus depuis ce dépôt).
+  Change à chaque nouveau déploiement Apps Script ; une erreur 503 sur
+  app.neden.fr vient presque toujours de là.
 - **Google Search Console** — vérification par TXT et soumission du sitemap.
   Tant que ce n'est pas fait, Google ne sait pas que le site existe, et aucun
   réglage Cloudflare n'y changera rien.

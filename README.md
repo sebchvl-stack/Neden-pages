@@ -35,26 +35,19 @@ npm run build   # sortie dans dist/
 4. Les routes SPA (`/confidentialite`, `/cgu`, …) sont gérées par le
    fallback Assets (voir `wrangler.jsonc` / `public/_redirects`).
 
-Workflow CI : `.github/workflows/cloudflare.yml` (réglages de zone +
-éventuel Worker `app.neden.fr` — **voir avertissement ci-dessous**).
+Workflow CI : `.github/workflows/cloudflare.yml` (réglages de zone
+`neden.fr` uniquement).
 
-## ⚠️ `app.neden.fr` / dossier `worker/` — conflit de déploiement
+## `app.neden.fr`
 
-Le Worker de **production** maintenu pour `app.neden.fr` vit dans
-`Neden-application/workers/app-proxy/` (correction 502 du 14/09 : en-têtes
-reconstruits, jamais les en-têtes navigateur bruts vers
-`script.google.com`).
-
-Le fichier `worker/app-proxy.js` de **ce** dépôt est une copie obsolète qui
-relaie encore `request.headers` tel quel — un `wrangler deploy` depuis
-`worker/` **écraserait la prod COMMAND OS**.
-
-**Décision produit ouverte (Sébastien)** :
-- (a) retirer `worker/` + le job Worker du workflow, ou
-- (b) le synchroniser avec `Neden-application/workers/app-proxy/`.
-
-En attendant : le job CI « Worker app.neden.fr » est **désactivé** pour
-éviter un écrasement accidentel. Ne pas redéployer `worker/` à la main.
+Ce dépôt ne déploie plus rien pour `app.neden.fr` (décision du 16/09/2026,
+suite à l'audit du 15/09 — voir historique git de ce README/`worker/` pour
+le détail). Le Worker de production (`app.neden.fr` = shell COMMAND OS +
+proxy API + PWA installable) vit entièrement dans
+`Neden-application/workers/app-proxy/`. Avant, ce dépôt avait son propre
+`worker/app-proxy.js`, qui ciblait le même Worker Cloudflare et relayait
+encore les en-têtes navigateur bruts (502) — supprimé plutôt que
+synchronisé, pour ne garder qu'une seule source de vérité de déploiement.
 
 ## État du contenu
 
