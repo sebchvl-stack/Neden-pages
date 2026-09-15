@@ -4,6 +4,14 @@
  * domaine personnalisé directement, ce Worker relaie donc les requêtes
  * vers l'URL /exec réelle en gardant app.neden.fr dans la barre d'adresse.
  *
+ * ⚠️ SOURCE DE VÉRITÉ PROD (15/09/2026) :
+ *   Neden-application/workers/app-proxy/app-proxy.js
+ * Ce fichier dans Neden-pages est une copie OBSOLÈTE (relaie encore les
+ * en-têtes navigateur bruts → 502 script.google.com). Ne PAS déployer
+ * tant que Sébastien n'a pas choisi : (a) supprimer ce dossier, ou
+ * (b) le synchroniser avec Neden-application. Le job CI Worker est
+ * désactivé en attendant.
+ *
  * Aucun secret nécessaire : APPS_SCRIPT_EXEC_URL est l'URL /exec publique
  * du déploiement web NEDEN (déjà accessible à quiconque a le lien) — pas
  * une clé, juste plus longue et moins mémorisable. Ne JAMAIS y mettre de
