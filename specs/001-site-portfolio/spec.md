@@ -195,11 +195,13 @@ l'URL Apps Script), sans étape intermédiaire visible.
   (Google Apps Script) de façon équivalente à l'accès direct par son URL
   actuelle, une fois la configuration réseau nécessaire effectuée par
   Sébastien.
-- **FR-012** (ajouté 04/09/2026): Une fois accédée via `app.neden.fr`,
-  l'application NEDEN DOIT être installable comme PWA (manifest + service
-  worker servis par le Worker, voir `worker/app-proxy.js`) — sans jamais
+- **FR-012** (ajouté 04/09/2026, implémentation déplacée le 16/09/2026):
+  Une fois accédée via `app.neden.fr`, l'application NEDEN DOIT être
+  installable comme PWA (manifest + service worker) — sans jamais
   prétendre fonctionner hors-ligne, l'app dépendant de données live
-  (`google.script.run`).
+  (`google.script.run`). Servi depuis le 16/09/2026 par
+  `Neden-application/workers/app-proxy/app-proxy.js` (plus par un Worker
+  de ce dépôt — voir la suppression de `worker/`, audit du 15/09/2026).
 
 ### Key Entities
 
