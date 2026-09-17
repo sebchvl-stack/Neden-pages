@@ -92,9 +92,10 @@ Google va re-tester une URL cassée et re-rejeter.)*
 2. Menu de gauche : **Google Auth Platform** → **Branding**.
 3. Dans la section **Domaine de l'application**, remplace dans chacun des
    3 champs `site.neden.fr` par `neden.fr` :
-   - **Page d'accueil de l'application** → `https://neden.fr`
-   - **Lien vers les règles de confidentialité** → `https://neden.fr/confidentialite`
-   - **Lien vers les conditions d'utilisation** → `https://neden.fr/cgu`
+   - **Page d'accueil de l'application** → `https://neden.fr` (**jamais** `app.neden.fr`)
+   - **Lien vers les règles de confidentialité** → `https://neden.fr/confidentialite/` (slash : forme 200)
+   - **Lien vers les conditions d'utilisation** → `https://neden.fr/cgu/`
+   - Détail à jour : `docs/OAUTH_BRANDING_CHECKLIST.md`
 4. Clique **Enregistrer** (ou l'équivalent en bas de la page).
 
 Le champ **Domaines autorisés** contient déjà `neden.fr` — pas besoin d'y
@@ -153,8 +154,8 @@ la config OAuth ci-dessus.
 ## Checklist finale
 
 - [ ] `https://neden.fr` charge sans erreur (testé en navigation privée)
-- [ ] `https://neden.fr/confidentialite` et `/cgu` chargent aussi
-- [ ] Les 3 URLs dans Google Cloud Console → Branding utilisent `neden.fr`
+- [ ] `https://neden.fr/confidentialite/` et `https://neden.fr/cgu/` chargent (200, pas « Just a moment »)
+- [ ] Les 3 URLs dans Google Cloud Console → Branding : home `https://neden.fr`, privacy **avec slash**, jamais `app.neden.fr`
 - [ ] Propriété `neden.fr` vérifiée dans Search Console (type **Domaine**)
 - [ ] Nouvelle demande de validation soumise dans Google Auth Platform
 

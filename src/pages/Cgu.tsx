@@ -68,7 +68,7 @@ export default function Cgu() {
   useDocumentMeta(
     "Conditions d'utilisation — NEDEN",
     "Conditions d'utilisation de NEDEN, l'orchestrateur personnel de Sébastien Cheval.",
-    '/cgu'
+    '/cgu/'
   );
   return (
     <>

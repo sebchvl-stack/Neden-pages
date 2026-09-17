@@ -3,11 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>NEDEN — Sébastien Cheval</title>
-    <meta name="description" content="NEDEN — orchestrateur personnel de Sébastien Cheval. Profil, compétences, expériences, réalisations, et le projet NEDEN." />
+    <title>NEDEN — orchestrateur personnel de recherche d’emploi</title>
+    <meta name="description" content="NEDEN est l’orchestrateur personnel de Sébastien Cheval : candidatures, emails Gmail, agenda Google Calendar et documents Google Drive, pour un unique utilisateur. Politique de confidentialité : https://neden.fr/confidentialite/" />
 
     <!-- Canonique : sans elle, neden.fr et www.neden.fr sont deux pages
-         distinctes aux yeux de Google et se font concurrence dans l'index. -->
+         distinctes aux yeux de Google et se font concurrence dans l'index.
+         www.neden.fr est NXDOMAIN aujourd'hui — l'apex neden.fr reste la
+         seule homepage OAuth. -->
     <link rel="canonical" href="https://neden.fr/" />
     <meta name="theme-color" content="#12151E" />
     <meta name="author" content="Sébastien Cheval" />
@@ -21,30 +23,66 @@
     <meta property="og:site_name" content="NEDEN" />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:url" content="https://neden.fr/" />
-    <meta property="og:title" content="NEDEN — Sébastien Cheval" />
-    <meta property="og:description" content="Profil hybride technique, produit et design. Compétences, expériences, réalisations, et NEDEN — l'orchestrateur personnel construit au quotidien." />
+    <meta property="og:title" content="NEDEN — orchestrateur personnel de recherche d’emploi" />
+    <meta property="og:description" content="NEDEN est l’orchestrateur personnel de Sébastien Cheval : candidatures, emails Gmail, agenda et documents Drive. Application privée à usage unique. Politique de confidentialité : https://neden.fr/confidentialite/" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="NEDEN — Sébastien Cheval" />
-    <meta name="twitter:description" content="Profil hybride technique, produit et design. Compétences, expériences, réalisations, et NEDEN." />
+    <meta name="twitter:title" content="NEDEN — orchestrateur personnel de recherche d’emploi" />
+    <meta name="twitter:description" content="Orchestrateur personnel de recherche d’emploi — Sébastien Cheval. Privacy : https://neden.fr/confidentialite/" />
 
-    <!-- Données structurées : le format que Google attend pour un site de
-         profil. Volontairement limité aux faits déjà publiés sur la page —
-         aucun champ rempli au jugé. og:image et sameAs sont absents tant que
-         l'image de partage et les URL LinkedIn/Discord réelles ne sont pas
-         fournies : une balise qui pointe dans le vide dégrade le partage au
-         lieu de l'améliorer. -->
+    <!-- Données structurées : Person (portfolio) + SoftwareApplication (OAuth).
+         Volontairement limité aux faits déjà publiés — aucun champ au jugé.
+         og:image et sameAs absents tant que l'image de partage et les URL
+         LinkedIn/Discord réelles ne sont pas fournies. -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Sébastien Cheval",
-        "url": "https://neden.fr/",
-        "jobTitle": "Chef de projet digital / Product Owner",
-        "address": { "@type": "PostalAddress", "addressLocality": "Nantes", "addressCountry": "FR" }
+        "@graph": [
+          {
+            "@type": "Person",
+            "name": "Sébastien Cheval",
+            "url": "https://neden.fr/",
+            "jobTitle": "Chef de projet digital / Product Owner",
+            "address": { "@type": "PostalAddress", "addressLocality": "Nantes", "addressCountry": "FR" }
+          },
+          {
+            "@type": "SoftwareApplication",
+            "name": "NEDEN",
+            "url": "https://neden.fr/",
+            "applicationCategory": "ProductivityApplication",
+            "operatingSystem": "Web",
+            "description": "Orchestrateur personnel de recherche d'emploi pour un unique utilisateur : candidatures, emails Gmail, agenda Google Calendar, documents Google Drive, suivi dans Notion.",
+            "author": { "@type": "Person", "name": "Sébastien Cheval" },
+            "privacyPolicy": "https://neden.fr/confidentialite/"
+          }
+        ]
       }
     </script>
   </head>
   <body>
+    <!-- Premier contenu textuel du body, hors React : un extracteur naïf
+         (OAuth Branding, souvent sans JS) lit l'objectif NEDEN et les
+         liens canoniques avant le portfolio. <noscript> en renfort. -->
+    <section id="neden-oauth-banner" class="neden-oauth-banner">
+      <p>
+        <strong>NEDEN</strong> — orchestrateur personnel de recherche d’emploi.
+        Application privée à usage unique (Sébastien Cheval) : candidatures, emails Gmail, agenda Calendar, documents Drive.
+        <a href="https://neden.fr/confidentialite/">Politique de confidentialité</a>
+        ·
+        <a href="https://neden.fr/cgu/">Conditions d’utilisation</a>
+      </p>
+    </section>
+    <noscript class="neden-oauth">
+      <section>
+        <h1>NEDEN — orchestrateur personnel de recherche d’emploi</h1>
+        <p>NEDEN est une application privée à usage strictement personnel, conçue, administrée et utilisée par un seul utilisateur, Sébastien Cheval, pour centraliser sa recherche d’emploi et son organisation professionnelle : candidatures, tâches, formations et emails liés à l’emploi.</p>
+        <p>NEDEN accède à Gmail (gmail.modify), Google Calendar, Google Drive et l’identité du compte Google, uniquement pour ces automatisations. La page d’accueil publique est https://neden.fr — app.neden.fr est l’écran de connexion, pas la homepage OAuth.</p>
+        <p>
+          <a href="https://neden.fr/confidentialite/">Politique de confidentialité</a>
+          —
+          <a href="https://neden.fr/cgu/">Conditions d’utilisation</a>
+        </p>
+      </section>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

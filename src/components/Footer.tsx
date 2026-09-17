@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { APP_LOGIN_URL, CGU_URL, PRIVACY_URL } from '../lib/site';
 
 // Structure élargie reprise du maquettage Figma NOLZUnUcR2iFPiu0bAzZjz, page
 // "11- Site internet (temporaire)" — demandé par Sébastien le 13/09/2026.
@@ -24,10 +24,14 @@ export default function Footer() {
             </div>
           </div>
           <div className="flex flex-col items-start sm:items-end gap-2 text-sm text-dim">
-            <Link to="/confidentialite" className="hover:text-ink transition-colors">Confidentialité</Link>
-            <Link to="/cgu" className="hover:text-ink transition-colors">Conditions Générales</Link>
-            <a href="https://app.neden.fr" target="_blank" rel="noreferrer" className="hover:text-ink transition-colors">
-              Accès plateforme
+            <a href={PRIVACY_URL} className="hover:text-ink transition-colors">
+              Confidentialité
+            </a>
+            <a href={CGU_URL} className="hover:text-ink transition-colors">
+              Conditions Générales
+            </a>
+            <a href={APP_LOGIN_URL} target="_blank" rel="noreferrer" className="hover:text-ink transition-colors">
+              Connexion (espace privé)
             </a>
           </div>
         </div>
