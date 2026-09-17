@@ -17,6 +17,12 @@
     // tableau de bord) — sans ça, un lien direct vers /confidentialite ou
     // /cgu (React Router, rendu 100% client) renverrait un 404 au lieu de
     // servir index.html.
+    //
+    // html_handling par défaut = auto-trailing-slash : le pré-rendu écrit
+    // dist/confidentialite/index.html donc `/confidentialite/` est la forme
+    // 200 et `/confidentialite` redirige 307. Canonical OAuth =
+    // https://neden.fr/confidentialite/ (slash). Ne pas passer à "none"
+    // (casserait / → index.html).
     "not_found_handling": "single-page-application"
   }
 }

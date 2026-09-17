@@ -11,7 +11,9 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/confidentialite" element={<Confidentialite />} />
+        <Route path="/confidentialite/" element={<Confidentialite />} />
         <Route path="/cgu" element={<Cgu />} />
+        <Route path="/cgu/" element={<Cgu />} />
       </Routes>
     </>
   );

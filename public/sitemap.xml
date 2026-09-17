@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Les trois routes réelles du site. À tenir à jour si une route est ajoutée :
-  un sitemap qui ment (page absente, ou page listée qui n'existe pas) est pire
-  qu'un sitemap absent — Google déclasse les URL en 404.
+  Les trois routes réelles du site. Privacy et CGU en forme canonique
+  (slash final) : c'est l'URL 200 servie par Workers Static Assets.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
@@ -11,12 +10,12 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://neden.fr/confidentialite</loc>
+    <loc>https://neden.fr/confidentialite/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://neden.fr/cgu</loc>
+    <loc>https://neden.fr/cgu/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>

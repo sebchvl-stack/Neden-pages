@@ -23,7 +23,7 @@ import { useEffect } from 'react';
 export default function useDocumentMeta(titre: string, description: string, chemin: string) {
   useEffect(() => {
     document.title = titre;
-    const url = `https://neden.fr${chemin}`;
+    const url = chemin.startsWith('http') ? chemin : `https://neden.fr${chemin}`;
 
     const majBalise = (
       selecteur: string,

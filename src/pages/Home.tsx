@@ -1,6 +1,7 @@
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import useDocumentMeta from '../hooks/useDocumentMeta';
+import { CGU_URL, HOME_DESCRIPTION, HOME_TITLE, PRIVACY_URL } from '../lib/site';
 
 // Clients réellement cités par Sébastien (noms confirmés) — logos en
 // attente (constitution, Principe II : nom réel affichable, logo jamais
@@ -232,24 +233,34 @@ const NEDEN_CAPACITES = [
 ];
 
 // Bloc d'objectif NEDEN — mêmes faits que ceux déjà publiés sur cette page
-// (constitution, Principe I/VI). Remonté juste après le hero : Google
-// OAuth Branding exige que l'objectif de l'application soit visible sans
-// login et sans scroller tout le portfolio.
+// (constitution, Principe I/VI). Placé AU-DESSUS du hero portfolio : un
+// extracteur naïf (OAuth Branding) doit lire l'objectif avant le CV.
+// Le <h1> porte le nom de l'application, pas le titre de profil.
 function NedenObjectifBlock() {
   return (
-    <section className="max-w-5xl mx-auto px-6 pb-16">
+    <section id="neden-objectif" className="max-w-5xl mx-auto px-6 pt-24 pb-8">
       <div className="bg-card border border-edge rounded-2xl p-6 sm:p-8 shadow-[inset_0_1px_0_rgba(255,255,255,.04)]">
         <div className="inline-flex items-center gap-2 bg-cardAlt px-3 py-1 rounded-full mb-4">
           <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
           <span className="text-secondary text-xs font-semibold tracking-wide">Objectif de l'application</span>
         </div>
-        <h2 className="text-2xl font-bold mb-3">NEDEN — orchestrateur personnel de recherche d'emploi</h2>
-        <p className="text-ink text-sm leading-relaxed mb-6">
+        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight mb-3">
+          NEDEN — orchestrateur personnel de recherche d&rsquo;emploi
+        </h1>
+        <p className="text-ink text-sm leading-relaxed mb-4">
           <strong>NEDEN est une application privée à usage strictement personnel</strong>, conçue,
           administrée et utilisée par un seul et unique utilisateur, Sébastien Cheval, pour centraliser
-          sa recherche d'emploi et son organisation professionnelle : candidatures, tâches, formations
-          et emails liés à l'emploi regroupés dans un tableau de bord unique. Une infrastructure réelle,
+          sa recherche d&rsquo;emploi et son organisation professionnelle : candidatures, tâches, formations
+          et emails liés à l&rsquo;emploi regroupés dans un tableau de bord unique. Une infrastructure réelle,
           utilisée et fait évoluer au quotidien — pas un concept théorique.
+        </p>
+        <p className="text-dim text-sm leading-relaxed mb-6">
+          La page d&rsquo;accueil publique de NEDEN est{' '}
+          <a href="https://neden.fr/" className="text-secondary hover:underline">
+            https://neden.fr
+          </a>
+          . L&rsquo;adresse app.neden.fr est uniquement l&rsquo;écran de connexion / l&rsquo;espace privé
+          de cet unique utilisateur — ce n&rsquo;est pas la homepage Branding OAuth.
         </p>
 
         <div className="grid sm:grid-cols-2 gap-3 mb-6">
@@ -262,13 +273,17 @@ function NedenObjectifBlock() {
         </div>
 
         <div className="bg-surface border border-edge rounded-xl p-4 text-dim text-sm">
-          L&rsquo;accès aux données Google (Gmail, Calendar, Drive) sert uniquement à faire
-          fonctionner ces automatisations pour son unique utilisateur, qui reste seul propriétaire de
-          ses données — voir la{' '}
-          <a href="/confidentialite" className="text-secondary hover:underline">
+          NEDEN accède aux données Google (Gmail, Calendar, Drive, identité du compte, plus les
+          scopes techniques Apps Script) uniquement pour faire fonctionner ces automatisations pour
+          son unique utilisateur, qui reste seul propriétaire de ses données — voir la{' '}
+          <a href={PRIVACY_URL} className="text-secondary hover:underline">
             politique de confidentialité
           </a>{' '}
-          pour le détail exact scope par scope.
+          ({PRIVACY_URL}) et les{' '}
+          <a href={CGU_URL} className="text-secondary hover:underline">
+            conditions d&rsquo;utilisation
+          </a>{' '}
+          ({CGU_URL}) pour le détail exact, scope par scope.
         </div>
 
         <p className="text-dim text-xs mt-6 italic">
@@ -282,35 +297,31 @@ function NedenObjectifBlock() {
 }
 
 export default function Home() {
-  useDocumentMeta(
-    'NEDEN — Sébastien Cheval',
-    "Profil hybride technique, produit et design. Compétences, expériences, réalisations, et NEDEN — l'orchestrateur personnel construit au quotidien.",
-    '/'
-  );
+  useDocumentMeta(HOME_TITLE, HOME_DESCRIPTION, '/');
   return (
     <div>
       <Header />
-      {/* ---------- Hero ---------- */}
-      <header className="max-w-5xl mx-auto px-6 pt-24 pb-20">
+      {/* Objectif NEDEN AU-DESSUS du hero — exigence Google OAuth Branding :
+          premier titre de page = nom + objectif de l'app, avant le H2
+          profil. Aucun gate, app.neden.fr n'est pas présenté comme homepage. */}
+      <NedenObjectifBlock />
+
+      {/* ---------- Hero portfolio ---------- */}
+      <header className="max-w-5xl mx-auto px-6 pt-8 pb-20">
         <div className="inline-flex items-center gap-2 text-xs uppercase tracking-wide text-secondary bg-card border border-edge rounded-full px-3 py-1 mb-6">
           Direction de projets digitaux · Stratégie, produit & IA
         </div>
         <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-extrabold text-xl mb-6">
           N
         </div>
-        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight mb-5 max-w-3xl">
+        <h2 className="text-4xl sm:text-6xl font-extrabold tracking-tight mb-5 max-w-3xl">
           Pilote d&rsquo;impact entre stratégie d&rsquo;affaires, ingénierie agile et IA
-        </h1>
+        </h2>
         <p className="text-dim leading-relaxed max-w-2xl text-lg">
           Sébastien Cheval — direction de comptes d&rsquo;envergure, co-gouvernance d&rsquo;agence
           digitale, et NEDEN, l&rsquo;orchestrateur personnel construit et opéré au quotidien.
         </p>
       </header>
-
-      {/* Objectif NEDEN remonté près du hero — exigence Google OAuth
-          Branding : expliquer l'application sans login, dès le haut de
-          page. Aucun gate, aucun lien homepage → app.neden.fr. */}
-      <NedenObjectifBlock />
 
       {/* ---------- Profil ---------- */}
       <section className="max-w-5xl mx-auto px-6 py-16">

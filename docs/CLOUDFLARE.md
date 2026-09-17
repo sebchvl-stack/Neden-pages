@@ -98,6 +98,11 @@ Ne jamais poser de **Managed Challenge** sur `app.neden.fr`. Les appels
 `google.script.run` ne sont pas des navigations : le défi les fait échouer en
 silence, et l'application semble planter sans raison.
 
+Ne jamais poser de **Managed Challenge** (ni Bot Fight / Super Bot Fight)
+sur l'apex `neden.fr` pour `/` et `/confidentialite` : le checker OAuth
+Google ne passe souvent pas le défi JS et lit alors « Just a moment »
+au lieu de l'objectif / de la privacy. Voir `docs/OAUTH_BRANDING_CHECKLIST.md`.
+
 ## Vérifier
 
 ```bash

@@ -10,6 +10,45 @@ body {
   @apply bg-bg text-ink font-sans;
 }
 
+.neden-oauth-banner {
+  background: #1a1d27;
+  border-bottom: 1px solid #2a2e3a;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.neden-oauth-banner p {
+  max-width: 64rem;
+  margin: 0 auto;
+  color: #cbd5e1;
+}
+.neden-oauth-banner a {
+  color: #22d3ee;
+  text-decoration: underline;
+}
+
+/* Visible seulement sans JS (les navigateurs masquent <noscript> si JS on). */
+noscript.neden-oauth {
+  display: block;
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 0;
+}
+noscript.neden-oauth h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0 0 0.75rem;
+}
+noscript.neden-oauth p {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0 0 0.75rem;
+}
+noscript.neden-oauth a {
+  color: #22d3ee;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

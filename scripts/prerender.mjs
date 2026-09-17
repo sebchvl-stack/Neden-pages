@@ -24,28 +24,34 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const DIST = join(ROOT, 'dist');
 
+const PRIVACY_URL = 'https://neden.fr/confidentialite/';
+const CGU_URL = 'https://neden.fr/cgu/';
+
 const ROUTES = [
   {
     path: '/',
-    titre: 'NEDEN — Sébastien Cheval',
+    canonical: 'https://neden.fr/',
+    titre: 'NEDEN — orchestrateur personnel de recherche d’emploi',
     description:
-      "Profil hybride technique, produit et design. Compétences, expériences, réalisations, et NEDEN — l'orchestrateur personnel construit au quotidien."
+      'NEDEN est l’orchestrateur personnel de Sébastien Cheval : candidatures, emails Gmail, agenda Google Calendar et documents Google Drive, pour un unique utilisateur. Application privée — pas un service public. Politique de confidentialité : https://neden.fr/confidentialite/'
   },
   {
     path: '/confidentialite',
+    canonical: PRIVACY_URL,
     titre: 'Politique de confidentialité — NEDEN',
     description:
-      "Ce que NEDEN fait des données Google auxquelles l'application accède, et ce qu'elle n'en fait pas."
+      "NEDEN accède à Gmail (gmail.modify), Calendar, Drive, l'identité Google et deux scopes techniques Apps Script, uniquement pour l'orchestration personnelle d'un unique utilisateur. Collecte, usage, stockage, partage, rétention, suppression et Limited Use."
   },
   {
     path: '/cgu',
+    canonical: CGU_URL,
     titre: "Conditions d'utilisation — NEDEN",
     description: "Conditions d'utilisation de NEDEN, l'orchestrateur personnel de Sébastien Cheval."
   }
 ];
 
 function injectMeta(html, route) {
-  const url = `https://neden.fr${route.path}`;
+  const url = route.canonical;
   return html
     .replace(/<title>.*?<\/title>/, `<title>${route.titre}</title>`)
     .replace(/<link rel="canonical" href="[^"]*"/, `<link rel="canonical" href="${url}"`)
@@ -61,6 +67,45 @@ function injectMeta(html, route) {
     );
 }
 
+function assertPrerender(route, html) {
+  const failures = [];
+  if (!html.includes('<noscript')) {
+    failures.push('noscript absent');
+  }
+  if (!html.includes(PRIVACY_URL)) {
+    failures.push(`lien privacy canonique ${PRIVACY_URL} absent`);
+  }
+  if (route.path === '/') {
+    const body = html.slice(html.indexOf('<body'));
+    const banner = body.indexOf('neden-oauth-banner');
+    const obj = body.indexOf('orchestrateur personnel');
+    const hero = body.indexOf('Pilote d');
+    if (banner === -1) failures.push('bannière OAuth statique absente');
+    if (obj === -1) failures.push('objectif NEDEN absent du body');
+    if (hero !== -1 && obj > hero) {
+      failures.push('objectif NEDEN apparaît après le hero portfolio');
+    }
+    if (!body.includes(CGU_URL)) failures.push('lien CGU canonique absent de la home');
+  }
+  if (route.path === '/confidentialite') {
+    for (const needle of [
+      'NEDEN accède',
+      'Limited Use',
+      "NEDEN's use and transfer to any other app",
+      'gmail.modify',
+      'script.scriptapp',
+      'script.external_request',
+      'Rétention',
+      'Suppression'
+    ]) {
+      if (!html.includes(needle)) failures.push(`privacy: « ${needle} » absent`);
+    }
+  }
+  if (failures.length) {
+    throw new Error(`Pré-rendu ${route.path} : ${failures.join(' ; ')}`);
+  }
+}
+
 async function main() {
   const template = readFileSync(join(DIST, 'index.html'), 'utf-8');
   const { render } = await import(join(ROOT, 'dist-ssr', 'entry-server.js'));
@@ -71,10 +116,11 @@ async function main() {
       '<div id="root"></div>',
       `<div id="root">${appHtml}</div>`
     );
+    assertPrerender(route, finalHtml);
     const outDir = route.path === '/' ? DIST : join(DIST, route.path.slice(1));
     mkdirSync(outDir, { recursive: true });
     writeFileSync(join(outDir, 'index.html'), finalHtml, 'utf-8');
-    console.log(`✅ Pré-rendu ${route.path} -> ${outDir.replace(ROOT + '/', '')}/index.html`);
+    console.log(`✅ Pré-rendu ${route.path} -> ${outDir.replace(ROOT + '/', '')}/index.html (${route.canonical})`);
   }
 }
 
