@@ -17,6 +17,12 @@ import useDocumentMeta from '../hooks/useDocumentMeta';
 //    complet, pas seulement .file/.readonly) — le maquette SOUS-estimait
 //    la portée réelle des scopes, ce qui serait doublement faux sur un
 //    document de conformité OAuth. Corrigé ci-dessous aux scopes réels.
+//    17/09/2026 — le manifeste réel (Neden-application/appsscript.json)
+//    déclare aussi deux scopes techniques Apps Script absents du
+//    maquette : script.scriptapp (déclencheurs / ScriptApp) et
+//    script.external_request (appels HTTP UrlFetchApp). Documentés
+//    honnêtement ci-dessous, sans inventer d'usage au-delà de ce que
+//    le code et cette page décrivent déjà.
 // 2. "TLS 1.3 / E2E" (badge) — "E2E" (chiffrement de bout en bout) est une
 //    revendication cryptographique précise qui ne correspond pas à
 //    l'architecture réelle (les données transitent en clair côté serveur
@@ -56,6 +62,18 @@ const SCOPES_GOOGLE = [
     nom: 'Identité Google',
     pill: 'userinfo.email / userinfo.profile',
     justification: "Identification du compte Google unique autorisé à s'authentifier auprès de l'application."
+  },
+  {
+    nom: 'Apps Script — application et déclencheurs',
+    pill: 'script.scriptapp',
+    justification:
+      "Scope technique de Google Apps Script : il autorise NEDEN à gérer l'application de script elle-même, notamment l'installation et la maintenance de déclencheurs horaires (ScriptApp) qui exécutent les automatisations personnelles de son unique utilisateur. Il n'élargit pas l'accès à Gmail, Calendar ni Drive."
+  },
+  {
+    nom: 'Apps Script — requêtes HTTP externes',
+    pill: 'script.external_request',
+    justification:
+      "Scope technique de Google Apps Script : il autorise NEDEN à effectuer des appels HTTP depuis le script (UrlFetchApp) vers les services externes déjà listés sur cette page (Notion, modèles d'IA) et vers les APIs Google correspondant aux scopes ci-dessus. Il ne constitue pas un accès à des données Google au-delà de ces appels."
   }
 ];
 
@@ -134,7 +152,7 @@ export default function Confidentialite() {
         <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1 text-ink">
           Politique de confidentialité — NEDEN
         </h1>
-        <div className="text-dim text-xs mb-8">Dernière mise à jour : 13 septembre 2026</div>
+        <div className="text-dim text-xs mb-8">Dernière mise à jour : 17 septembre 2026</div>
 
         <p className="text-dim text-sm leading-relaxed mb-8">
           NEDEN est une application <strong className="text-ink">personnelle et à usage unique</strong>,
@@ -189,7 +207,9 @@ export default function Confidentialite() {
             <p className="mb-4">
               Conformément à la Politique relative aux données utilisateur des services d'API Google, la
               demande d'accès aux scopes est strictement limitée aux fonctionnalités requises pour les
-              tâches d'orchestration personnelle.
+              tâches d'orchestration personnelle. Les quatre premiers scopes ci-dessous portent sur des
+              données Google de l'utilisateur unique ; les deux derniers sont des scopes techniques
+              d'exécution Apps Script, présents dans le manifeste réel de l'application.
             </p>
             <div className="space-y-4">
               {SCOPES_GOOGLE.map((s) => (

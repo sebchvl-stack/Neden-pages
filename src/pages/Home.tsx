@@ -128,7 +128,7 @@ const COMPETENCE_DOMAINES = [
   {
     domaine: 'IA & Systèmes Autonomes',
     resume:
-      "Conception d'automatisations et d'agents IA appliqués à des besoins réels (voir NEDEN, plus bas sur cette page).",
+      "Conception d'automatisations et d'agents IA appliqués à des besoins réels (voir NEDEN, plus haut sur cette page).",
     items: ['IA générative', 'Automatisation', 'Prototypage', 'Veille technologique']
   },
   {
@@ -231,6 +231,56 @@ const NEDEN_CAPACITES = [
   { titre: 'Veille & réunions', texte: 'Veille automatique et transcription de réunions (visio ou en présentiel).' }
 ];
 
+// Bloc d'objectif NEDEN — mêmes faits que ceux déjà publiés sur cette page
+// (constitution, Principe I/VI). Remonté juste après le hero : Google
+// OAuth Branding exige que l'objectif de l'application soit visible sans
+// login et sans scroller tout le portfolio.
+function NedenObjectifBlock() {
+  return (
+    <section className="max-w-5xl mx-auto px-6 pb-16">
+      <div className="bg-card border border-edge rounded-2xl p-6 sm:p-8 shadow-[inset_0_1px_0_rgba(255,255,255,.04)]">
+        <div className="inline-flex items-center gap-2 bg-cardAlt px-3 py-1 rounded-full mb-4">
+          <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
+          <span className="text-secondary text-xs font-semibold tracking-wide">Objectif de l'application</span>
+        </div>
+        <h2 className="text-2xl font-bold mb-3">NEDEN — orchestrateur personnel de recherche d'emploi</h2>
+        <p className="text-ink text-sm leading-relaxed mb-6">
+          <strong>NEDEN est une application privée à usage strictement personnel</strong>, conçue,
+          administrée et utilisée par un seul et unique utilisateur, Sébastien Cheval, pour centraliser
+          sa recherche d'emploi et son organisation professionnelle : candidatures, tâches, formations
+          et emails liés à l'emploi regroupés dans un tableau de bord unique. Une infrastructure réelle,
+          utilisée et fait évoluer au quotidien — pas un concept théorique.
+        </p>
+
+        <div className="grid sm:grid-cols-2 gap-3 mb-6">
+          {NEDEN_CAPACITES.map((n) => (
+            <div key={n.titre} className="bg-surface border border-edge rounded-xl p-4">
+              <div className="font-semibold text-sm mb-1">{n.titre}</div>
+              <div className="text-dim text-xs">{n.texte}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="bg-surface border border-edge rounded-xl p-4 text-dim text-sm">
+          L&rsquo;accès aux données Google (Gmail, Calendar, Drive) sert uniquement à faire
+          fonctionner ces automatisations pour son unique utilisateur, qui reste seul propriétaire de
+          ses données — voir la{' '}
+          <a href="/confidentialite" className="text-secondary hover:underline">
+            politique de confidentialité
+          </a>{' '}
+          pour le détail exact scope par scope.
+        </div>
+
+        <p className="text-dim text-xs mt-6 italic">
+          Histoire complète, chiffres clés et liens Discord/LinkedIn : en attente des sources que
+          Sébastien doit encore fournir (constitution, Principe I — seules des données déjà vérifiées
+          sont publiées ici).
+        </p>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   useDocumentMeta(
     'NEDEN — Sébastien Cheval',
@@ -257,6 +307,11 @@ export default function Home() {
         </p>
       </header>
 
+      {/* Objectif NEDEN remonté près du hero — exigence Google OAuth
+          Branding : expliquer l'application sans login, dès le haut de
+          page. Aucun gate, aucun lien homepage → app.neden.fr. */}
+      <NedenObjectifBlock />
+
       {/* ---------- Profil ---------- */}
       <section className="max-w-5xl mx-auto px-6 py-16">
         <h2 className="text-2xl font-bold mb-6">Profil</h2>
@@ -274,7 +329,7 @@ export default function Home() {
           et participé aux décisions stratégiques de l&rsquo;agence — de l&rsquo;architecture
           technique au pilotage de la performance. Ce que je recherche : des projets où
           stratégie, technologie, design et humain sont réellement liés — c&rsquo;est aussi
-          l&rsquo;intention derrière NEDEN, présenté plus bas sur cette page.
+          l&rsquo;intention derrière NEDEN, présenté juste au-dessus sur cette page.
         </p>
       </section>
 
@@ -425,49 +480,6 @@ export default function Home() {
               <div className="text-dim text-xs">{c.detail}</div>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* ---------- NEDEN ---------- */}
-      <section className="max-w-5xl mx-auto px-6 py-16">
-        <div className="bg-card border border-edge rounded-2xl p-6 sm:p-8 shadow-[inset_0_1px_0_rgba(255,255,255,.04)]">
-          <div className="inline-flex items-center gap-2 bg-cardAlt px-3 py-1 rounded-full mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
-            <span className="text-secondary text-xs font-semibold tracking-wide">Objectif de l'application</span>
-          </div>
-          <h2 className="text-2xl font-bold mb-3">NEDEN — orchestrateur personnel de recherche d'emploi</h2>
-          <p className="text-ink text-sm leading-relaxed mb-6">
-            <strong>NEDEN est une application privée à usage strictement personnel</strong>, conçue,
-            administrée et utilisée par un seul et unique utilisateur, Sébastien Cheval, pour centraliser
-            sa recherche d'emploi et son organisation professionnelle : candidatures, tâches, formations
-            et emails liés à l'emploi regroupés dans un tableau de bord unique. Une infrastructure réelle,
-            utilisée et fait évoluer au quotidien — pas un concept théorique.
-          </p>
-
-          <div className="grid sm:grid-cols-2 gap-3 mb-6">
-            {NEDEN_CAPACITES.map((n) => (
-              <div key={n.titre} className="bg-surface border border-edge rounded-xl p-4">
-                <div className="font-semibold text-sm mb-1">{n.titre}</div>
-                <div className="text-dim text-xs">{n.texte}</div>
-              </div>
-            ))}
-          </div>
-
-          <div className="bg-surface border border-edge rounded-xl p-4 text-dim text-sm">
-            L&rsquo;accès aux données Google (Gmail, Calendar, Drive) sert uniquement à faire
-            fonctionner ces automatisations pour son unique utilisateur, qui reste seul propriétaire de
-            ses données — voir la{' '}
-            <a href="/confidentialite" className="text-secondary hover:underline">
-              politique de confidentialité
-            </a>{' '}
-            pour le détail exact scope par scope.
-          </div>
-
-          <p className="text-dim text-xs mt-6 italic">
-            Histoire complète, chiffres clés et liens Discord/LinkedIn : en attente des sources que
-            Sébastien doit encore fournir (constitution, Principe I — seules des données déjà vérifiées
-            sont publiées ici).
-          </p>
         </div>
       </section>
 
